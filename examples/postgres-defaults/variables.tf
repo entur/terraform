@@ -5,12 +5,12 @@ variable "gcp_project" {
 
 variable "labels" {
   description = "Labels used in all resources"
-  type        = "map"
+  type        = map(string)
   default = {
     manager = "terraform"
-    team    = "TEAM"
-    slack   = "talk-TEAM"
-    app     = "SERVICE"
+    team    = "teamname"
+    slack   = "talk-teamname"
+    app     = "service"
   }
 }
 

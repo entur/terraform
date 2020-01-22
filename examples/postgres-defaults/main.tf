@@ -3,8 +3,8 @@ terraform {
 }
 
 module "postgres" {
-  source               = "bitbucket.org/enturas/terraform-modules//modules/postgres"
-  gco_project          = var.gco_project
+  source               = "github.com/entur/terraform//modules/postgres"
+  gcp_project          = var.gcp_project
   labels               = var.labels
   kubernetes_namespace = var.kubernetes_namespace
   postgres_db_name     = "example"
