@@ -12,7 +12,7 @@ resource "google_service_account" "team-instance-credentials" {
 }
 
 resource "google_service_account_key" "team-instance-credentials" {
-  service_account_id = "${google_service_account.team-instance-credentials.name}"
+  service_account_id = google_service_account.team-instance-credentials.name
 }
 
 resource "google_project_iam_member" "project" {
