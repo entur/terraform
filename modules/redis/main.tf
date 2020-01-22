@@ -17,7 +17,7 @@ module "memorystore" {
   authorized_network = "${data.google_compute_network.default-network.self_link}"
 
 
-  reserved_ip_range = var.redis_reserved_ip_range
+  reserved_ip_range = var.reserved_ip_range
 
   labels = var.labels
 }
