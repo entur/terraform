@@ -17,11 +17,11 @@ variable "kubernetes_namespace" {
   description = "Your kubernetes namespace"
 }
 
-variable "postgres_db_name" {
+variable "db_name" {
   description = "Name of the default database"
 }
 
-variable "postgres_user" {
+variable "db_user" {
   description = "Default user for postgres db"
 }
 

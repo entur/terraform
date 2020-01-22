@@ -32,7 +32,7 @@ module "sql-db_postgresql" {
   region           = var.region
   zone             = var.zoneLetter
   user_labels      = var.labels
-  db_name          = var.postgres_db_name
+  db_name          = var.db_name
 
   ip_configuration = {
     ipv4_enabled        = true
@@ -41,7 +41,7 @@ module "sql-db_postgresql" {
     authorized_networks = []
   }
 
-  user_name = var.postgres_user
+  user_name = var.db_user
 
   backup_configuration = {
     enabled            = var.db_instance_backup_enabled
@@ -61,7 +61,7 @@ resource "kubernetes_secret" "team-db-credentials" {
     labels    = var.labels
   }
   data = {
-    username = var.postgres_user
+    username = var.db_user
     password = module.sql-db_postgresql.generated_user_password
   }
 }

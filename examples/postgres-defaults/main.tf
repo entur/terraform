@@ -7,8 +7,8 @@ module "postgres" {
   gcp_project          = var.gcp_project
   labels               = var.labels
   kubernetes_namespace = var.kubernetes_namespace
-  postgres_db_name     = "example"
-  postgres_user        = "example-user"
+  db_name              = "example"
+  db_user              = "example-user"
   region               = "europe-west1"
   zoneLetter           = "d"
 }
