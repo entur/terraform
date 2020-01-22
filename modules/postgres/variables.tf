@@ -4,12 +4,12 @@ variable "gcp_project" {
 
 variable "labels" {
   description = "Labels used in all resources"
-  type        = "map"
+  type        = map(string)
   #default = {
   #  manager = "terraform"
   #  team    = "TEAM"
   #  slack   = "talk-TEAM"
-  # app     = "SERVICE"
+  #  app     = "SERVICE"
   #}
 }
 
@@ -37,8 +37,21 @@ variable "postgresql_version" {
   description = "Which POSTGRES version to use. Check availability before declaring any version."
   default     = "POSTGRES_9_6"
 }
+
 variable "db_instance_suffix" {
   description = "A suffix for the database instance, may be changed if environment is destroyed and then needed again (name collision workaround)"
   default     = "postgres"
 }
+
+variable "db_instance_backup_enabled" {
+  description = "Enable database backup"
+  default     = true
+}
+
+variable "db_instance_backup_time" {
+  description = "When the backup should be scheduled"
+  default     = "04:00"
+}
+
+
 

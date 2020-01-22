@@ -8,7 +8,7 @@ locals {
 
 resource "google_service_account" "team-instance-credentials" {
   account_id   = "${var.labels.app}-${var.kubernetes_namespace}-cred"
-  display_name = "Service Account for Varelager team SQL"
+  display_name = "Service Account for ${var.labels.team} team SQL"
 }
 
 resource "google_service_account_key" "team-instance-credentials" {
@@ -44,9 +44,9 @@ module "sql-db_postgresql" {
   user_name = var.postgres_user
 
   backup_configuration = {
-    enabled            = true
+    enabled            = var.db_instance_backup_enabled
+    start_time         = var.db_instance_backup_time
     binary_log_enabled = false #cannot be used with postgres
-    start_time         = "04:00"
   }
 }
 
