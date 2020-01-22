@@ -3,7 +3,9 @@ terraform {
 }
 
 data "google_compute_network" "default-network" {
-  name = "default-network"
+  provider = google
+  name     = "default-network"
+  project  = var.gcp_project
 }
 
 module "memorystore" {
