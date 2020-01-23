@@ -31,3 +31,15 @@ This repository is in active development. Feel free to contribute!
       zone                 = "europe-west1-d"
       reserved_ip_range    = "10.100.10.8/29"
     }
+
+## [Bucket](./modules/bucket)
+
+    module "bucket" {
+      source                      = "github.com/entur/terraform//modules/bucket"
+      labels                      = {}
+      gcp_project                 = "your-project"
+      location                    = "europe-west1"
+      storage_class               = "REGIONAL"
+      kubernetes_namespace        = "default"
+      service_account_bucket_role = "READER"
+    }
