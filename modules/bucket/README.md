@@ -1,0 +1,1 @@
+This module can be used to quickly get a bucket up and running according to Entur conventions
