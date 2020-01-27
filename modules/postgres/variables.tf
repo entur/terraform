@@ -2,6 +2,14 @@ variable "gcp_project" {
   description = "The GCP project id"
 }
 
+variable "region" {
+  description = "GCP default region"
+}
+
+variable "zoneLetter" {
+  description = "GCP default zone"
+}
+
 variable "labels" {
   description = "Labels used in all resources"
   type        = map(string)
@@ -23,14 +31,6 @@ variable "db_name" {
 
 variable "db_user" {
   description = "Default user for postgres db"
-}
-
-variable "region" {
-  description = "GCP default region"
-}
-
-variable "zoneLetter" {
-  description = "GCP default zone"
 }
 
 variable "postgresql_version" {

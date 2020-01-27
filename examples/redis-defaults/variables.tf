@@ -2,6 +2,10 @@ variable "gcp_project" {
   description = "The GCP project id"
 }
 
+variable "zone" {
+  description = "GCP default zone"
+}
+
 variable "kubernetes_namespace" {
   description = "Your kubernetes namespace"
 }

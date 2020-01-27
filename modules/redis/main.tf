@@ -12,7 +12,7 @@ module "memorystore" {
   source  = "terraform-google-modules/memorystore/google"
   version = "1.0.0"
 
-  name    = "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-redis"
+  name    = "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.redis_instance_suffix}"
   project = var.gcp_project
 
   location_id        = var.zone

@@ -2,6 +2,10 @@ variable "gcp_project" {
   description = "The GCP project id"
 }
 
+variable "location" {
+  description = "GCP bucket location"
+}
+
 variable "labels" {
   description = "Labels used in all resources"
   type        = map(string)

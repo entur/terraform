@@ -33,8 +33,9 @@ resource "google_storage_bucket" "storage_bucket" {
 
 # Create Service account
 resource "google_service_account" "storage_bucket_service_account" {
-  account_id   = "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.bucket_instance_suffix}"
-  display_name = "Service Account for ${var.labels.app} app bucket"
+  # this can be maximum 30 chars long - shorten namespace staging => sta and do not list teamname
+  account_id   = "${var.labels.app}-${substr(var.kubernetes_namespace,0,3)}-${var.bucket_instance_suffix}"
+  display_name = "Service Account for ${var.labels.team}: ${var.labels.app} app bucket"
   project      = var.gcp_project
 }
 
