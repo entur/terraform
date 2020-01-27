@@ -1,4 +1,4 @@
-# Work in progress
+# Modules
 
 This repository is in active development. Feel free to contribute!
 
@@ -43,3 +43,11 @@ This repository is in active development. Feel free to contribute!
       kubernetes_namespace        = "default"
       service_account_bucket_role = "READER"
     }
+
+# Contribute
+
+Feel free to add a module and provide a PR.
+Follow the same conventions as seen in `/modules` and `/examples`.
+For testing a module, create a `variables.auto.tfvars` in the example directory (this is ignored by git) so you don't have to fill inn all variables all the time.
+
+Please try to keep away from using default vaules that are not default for most users (also outside Entur).
