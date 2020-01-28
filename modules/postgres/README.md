@@ -8,10 +8,30 @@ Creates a postgresql named **team-app-namespace-suffix**: `${var.labels.team}-${
 
 ## Side effects
 
-Generated Kubernetes Secrets:
+### Generated Service Account:
+
+- `${var.labels.app}-${var.kubernetes_namespace}-cred`
+  - `[app]-[namespace]-cred`
+  - Name of the Service Account used by this postgresql database
+  - Render: `aweomeblog-production-cred`
+      - team = `ninja`
+      - app = `awesomeblog`
+      - namespace = `production`
+
+### Generated Kubernetes Secrets:
 
 - `${var.labels.app}-db-credentials` with `{ username: "PG_USER", password: "PG_PASSWORD" }`
+  - **[app]-db-credentials**
+  - Contains the username and password of the database
+  - Render: `awesomeblog-db-credentials`
+    - given
+      - app = `awesomeblog`
 - `${var.labels.app}-instance-credentials` with `{ credentials.json: "PRIVATEKEY" }`
+  - `[app]-instance-credentials`
+  - Contains the credentials.json service account credentials
+  - Render: `awesomeblog-instance-credentials`
+    - given
+      - app = `awesomeblog`
 
 ## Inputs
 

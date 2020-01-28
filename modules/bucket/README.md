@@ -4,16 +4,36 @@ This module can be used to quickly get a bucket up and running according to Entu
 
 ## Main effect
 
-Creates a bucket named **app-nam-suffix**: `${var.labels.app}-${substr(var.kubernetes_namespace,0,3)}-${var.bucket_instance_suffix}`.
+Creates a bucket named **team-app-namespace-suffix**: `${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.bucket_instance_suffix}`.
 
 > NB: The total length of the bucket name cannot exceed 30 characters.
 
 ## Side effects
 
-Generated Kubernetes Secrets:
+### Generated Service Account:
 
-- `${var.labels.app}-db-credentials` with `{ username: "PG_USER", password: "PG_PASSWORD" }`
-- `${var.labels.app}-instance-credentials` with `{ credentials.json: "PRIVATEKEY" }`
+- `${var.labels.app}-${substr(var.kubernetes_namespace,0,3)}-${var.bucket_instance_suffix}`
+  - `[app]-[nam(espace)]-[suffix]`
+  - Name of the Service Account used by this bucket (name length < 30)
+  - Render: `awesome-pro-bucket`
+    - given
+      - app = `awesomeblog`
+      - namespace = `production`
+      - suffix = `bucket`
+
+This seems odd, but stems from the fact that bucket SA cannot be named more than 30 characters longl
+
+### Generated Kubernetes Secrets:
+
+- `${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.bucket_instance_suffix}-credentials` with `{ credentials.json: "PRIVATEKEY" }`
+  - `[team]-[app]-[namespace]-[suffix]-credentials`
+  - Contains the credentials.json service account credentials
+  - Render: `ninja-blog-dev-bucket-credentials`
+    - given
+      - team = `ninja`
+      - app = `awesomeblog`
+      - namespace = `production`
+      - suffix = `bucket`
 
 ## Inputs
 
@@ -37,4 +57,4 @@ Generated Kubernetes Secrets:
 
 | Name | Description |
 |------|-------------|
-| sql-db-generated-user-password | The database password, also stored in ${var.labels.app}-db-credentials |
+| google_storage_bucket_name | The bucket name |
