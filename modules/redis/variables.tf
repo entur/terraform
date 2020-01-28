@@ -4,7 +4,6 @@ variable "gcp_project" {
 
 variable "zone" {
   description = "GCP default zone"
-  default     = "europe-west1-d"
 }
 
 variable "labels" {
@@ -24,4 +23,9 @@ variable "reserved_ip_range" {
 
 variable "kubernetes_namespace" {
   description = "Your kubernetes namespace"
+}
+
+variable "redis_instance_suffix" {
+  description = "A suffix for the database instance, may be changed if environment is destroyed and then needed again (name collision workaround)"
+  default     = "redis"
 }

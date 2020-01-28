@@ -2,6 +2,10 @@ variable "gcp_project" {
   description = "The GCP project id"
 }
 
+variable "location" {
+  description = "GCP bucket location"
+}
+
 variable "labels" {
   description = "Labels used in all resources"
   type        = map(string)
@@ -22,11 +26,6 @@ variable "bucket_instance_suffix" {
   default     = "bucket"
 }
 
-variable "location" {
-  description = "GCP bucket location"
-  default     = "europe-west1"
-}
-
 variable "storage_class" {
   description = "GCP storage class"
   default     = "REGIONAL"
@@ -43,7 +42,7 @@ variable "log_bucket" {
 }
 
 variable "bucket_policy_only" {
-  description = "Enables Bucket Policy Only access to a bucket."
+  description = "Enables Bucket Policy Only access to a bucket"
   default     = "false"
 }
 

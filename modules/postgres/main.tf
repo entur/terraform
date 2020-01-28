@@ -27,7 +27,7 @@ module "sql-db_postgresql" {
   version = "2.0.0"
   # insert the 4 required variables here
   database_version = var.postgresql_version
-  name             = "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.db_instance_suffix}" //postgresql-${random_id.name.hex}"
+  name             = "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.db_instance_suffix}"
   project_id       = var.gcp_project
   region           = var.region
   zone             = var.zoneLetter

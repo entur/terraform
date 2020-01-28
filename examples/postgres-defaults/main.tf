@@ -4,6 +4,7 @@ terraform {
 
 module "postgres" {
   source               = "github.com/entur/terraform//modules/postgres"
+#  source                      = "../../modules/postgres"
   gcp_project          = var.gcp_project
   labels               = var.labels
   kubernetes_namespace = var.kubernetes_namespace

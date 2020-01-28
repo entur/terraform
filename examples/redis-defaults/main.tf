@@ -4,6 +4,7 @@ terraform {
 
 module "redis" {
   source               = "github.com/entur/terraform//modules/redis"
+#  source                      = "../../modules/redis"
   gcp_project          = var.gcp_project
   labels               = var.labels
   kubernetes_namespace = var.kubernetes_namespace

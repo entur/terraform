@@ -11,6 +11,13 @@ provider "google" {
   version = "~> 2.19"
 }
 
+locals {
+  sa_name = "${var.labels.app}-${substr(var.kubernetes_namespace,0,3)}-${var.bucket_instance_suffix}"
+}
+
+resource "null_resource" "is_environment_valid" {
+  count = length(local.sa_name) < 31 ? 1 : "SA name cannot be longer than 30, consider shortening your suffix?"
+}
 
 # Create bucket
 resource "google_storage_bucket" "storage_bucket" {
@@ -33,8 +40,9 @@ resource "google_storage_bucket" "storage_bucket" {
 
 # Create Service account
 resource "google_service_account" "storage_bucket_service_account" {
-  account_id   = "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.bucket_instance_suffix}"
-  display_name = "Service Account for ${var.labels.app} app bucket"
+  # this can be maximum 30 chars long - shorten namespace staging => sta and do not list teamname
+  account_id   = local.sa_name
+  display_name = "Service Account for ${var.labels.team}: ${var.labels.app} app bucket"
   project      = var.gcp_project
 }
 
