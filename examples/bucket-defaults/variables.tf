@@ -21,3 +21,8 @@ variable "kubernetes_namespace" {
   description = "Your kubernetes namespace"
   default     = "default"
 }
+
+variable "prevent_destroy" {
+  description = "Prevent destruction of bucket"
+  type        = bool
+}

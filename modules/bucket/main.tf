@@ -12,7 +12,7 @@ provider "google" {
 }
 
 locals {
-  sa_name = "${var.labels.app}-${substr(var.kubernetes_namespace,0,3)}-${var.bucket_instance_suffix}"
+  sa_name = "${var.labels.app}-${substr(var.kubernetes_namespace, 0, 3)}-${var.bucket_instance_suffix}"
 }
 
 resource "null_resource" "is_environment_valid" {
@@ -35,6 +35,17 @@ resource "google_storage_bucket" "storage_bucket" {
   logging {
     log_bucket        = var.log_bucket
     log_object_prefix = "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.bucket_instance_suffix}"
+  }
+}
+
+resource "random_id" "protector" {
+  count       = var.prevent_destroy ? 1 : 0
+  byte_length = 8
+  keepers = {
+    protector = google_storage_bucket.storage_bucket.id
+  }
+  lifecycle {
+    prevent_destroy = true
   }
 }
 
