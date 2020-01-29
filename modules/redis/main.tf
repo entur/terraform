@@ -8,6 +8,7 @@ data "google_compute_network" "default-network" {
   project  = var.gcp_project
 }
 
+// https://github.com/terraform-google-modules/terraform-google-memorystore
 module "memorystore" {
   source  = "terraform-google-modules/memorystore/google"
   version = "1.0.0"
@@ -22,6 +23,17 @@ module "memorystore" {
   reserved_ip_range = var.reserved_ip_range
 
   labels = var.labels
+}
+
+resource "random_id" "protector" {
+  count       = var.prevent_destroy ? 1 : 0
+  byte_length = 8
+  keepers = {
+    protector = module.memorystore.id
+  }
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "kubernetes_config_map" "team-redis-configmap" {

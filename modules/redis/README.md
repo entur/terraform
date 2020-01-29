@@ -34,6 +34,7 @@ Generated Kubernetes Config Map:
 | labels.app | The name of this appliation / workload | string | n/a | yes |
 | reserved_ip_range | The reserved IP range in CIDR notation | string | n/a | yes |
 | kubernetes_namespace | The namespace you wish to target. Note, this is only here to allow separate envs to have different redis instances. They do not actually live in the namespace. | string | n/a | yes |
+| prevent_destroy | Prevents the destruction of the redis instance | bool | n/a | yes |
 | redis_instance_suffix | The suffix of this redis instance | string | "redis" | no |
 
 
