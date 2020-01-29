@@ -56,6 +56,7 @@ variable "db_instance_backup_time" {
 variable "prevent_destroy" {
   description = "Prevent the destruction of this postgres database"
   type        = bool
+  default     = false
 }
 
 
