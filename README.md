@@ -69,3 +69,13 @@ Follow the same conventions as seen in `/modules` and `/examples`.
 For testing a module, create a `variables.auto.tfvars` in the example directory (this is ignored by git) so you don't have to fill inn all variables all the time.
 
 Please try to keep away from using default vaules that are not default for most users (also outside Entur).
+
+## Handle errors and precondition
+
+Sometimes it may be a good idea to supply some conditions and checks. This is how to do it:
+
+```hcl
+resource "null_resource" "name_of_condition" {
+  count = CONDITION ? 1 : "Error message here"
+}
+```
