@@ -33,4 +33,5 @@ variable "redis_instance_suffix" {
 variable "prevent_destroy" {
   description = "Prevents destruction of this redis instance"
   type        = bool
+  default     = false
 }
