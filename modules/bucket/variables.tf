@@ -54,4 +54,5 @@ variable "service_account_bucket_role" {
 variable "prevent_destroy" {
   description = "Prevent destruction of bucket"
   type        = bool
+  default     = false
 }
