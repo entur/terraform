@@ -1,0 +1,28 @@
+version: 2.1
+
+commands:
+  set-version:
+    steps:
+    - run: echo "export VERSION=$(echo "master.$(date '+%Y')-$(date '+%m')-$(date '+%d')" | sed 's/master/v1/g' | tr '/' '.' )" >> $BASH_ENV
+jobs:
+  tag:
+    docker:
+      - image: circleci/ruby:2.4.2-jessie-node
+    steps:
+      - checkout
+      - set-version
+      - run:
+          name: Tag git commit with build version and push to github
+          command: |
+            git config --global push.default simple
+            git config --global user.email "circleci@entur.no"
+            git config --global user.name "circleci"
+            echo $VERSION
+            git tag $VERSION
+            git push origin $VERSION
+
+workflows:
+  "Release Pipeline":
+    jobs:
+      - tag:
+          context: org-default-build
