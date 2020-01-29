@@ -17,3 +17,8 @@ variable "labels" {
 variable "kubernetes_namespace" {
   description = "Your kubernetes namespace"
 }
+
+variable "prevent_destroy" {
+  description = "Prevent the destruction of this postgres database"
+  type        = bool
+}

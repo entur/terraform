@@ -50,6 +50,16 @@ module "sql-db_postgresql" {
   }
 }
 
+resource "random_id" "protector" {
+  count       = var.prevent_destroy ? 1 : 0
+  byte_length = 8
+  keepers = {
+    protector = module.sql-db_postgresql.instance_name
+  }
+  lifecycle {
+    prevent_destroy = true
+  }
+}
 
 resource "kubernetes_secret" "team-db-credentials" {
   depends_on = [
