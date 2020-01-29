@@ -44,6 +44,7 @@ Creates a postgresql named **team-app-namespace-suffix**: `${var.labels.team}-${
 | labels.team | The name of your team or department | string | n/a | yes |
 | labels.app | The name of this appliation / workload | string | n/a | yes |
 | kubernetes_namespace | The namespace you wish to target. This is the namespace that the secrets will be stored in | string | n/a | yes |
+| prevent_destroy | Prevents the destruction of the bucket | bool | false | no |
 
 ## Outputs
 
