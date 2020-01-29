@@ -46,6 +46,7 @@ This seems odd, but stems from the fact that bucket SA cannot be named more than
 | labels.app | The name of this appliation / workload | string | n/a | yes |
 | location | The location of your bucket | string | n/a | yes |
 | kubernetes_namespace | The namespace you wish to target. This is the namespace that the secrets will be stored in | string | n/a | yes |
+| prevent_destroy | Prevents the destruction of the bucket | bool | false | no |
 | bucket_instance_suffix | A suffix that is added to the bucket, this can be used as a workaround for destroying and creating a bucket (naming collision) | string | "bucket" | no |
 | storage_class | The storage class of the bucket | string | "RGIONAL" | no |
 | versioning | Should bucket be versioned? | bool | true | no |

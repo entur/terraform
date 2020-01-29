@@ -25,5 +25,9 @@ variable "redis_reserved_ip_range" {
   default     = "10.110.20.8/29"
 }
 
+variable "prevent_destroy" {
+  description = "Prevents destruction of this redis instance"
+  type        = bool
+}
 
 
