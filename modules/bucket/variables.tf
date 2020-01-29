@@ -50,3 +50,8 @@ variable "service_account_bucket_role" {
   description = "Role of the Service Account"
   default     = "READER"
 }
+
+variable "prevent_destroy" {
+  description = "Prevent destruction of bucket"
+  type        = bool
+}
