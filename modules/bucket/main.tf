@@ -4,7 +4,7 @@ terraform {
 
 provider "kubernetes" {
   version = "~> 1.10"
-  host    = "127.0.0.1:8001" // kubectl proxy
+  # host    = "127.0.0.1:8001" // kubectl proxy
 }
 
 provider "google" {
