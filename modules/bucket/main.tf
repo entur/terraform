@@ -12,7 +12,7 @@ provider "google" {
 }
 
 locals {
-  sa_name = "${var.labels.app}-${substr(var.kubernetes_namespace, 0, 3)}-${var.bucket_instance_suffix}"
+  sa_name = "${var.labels.app}-${var.bucket_instance_suffix}"
 }
 
 resource "null_resource" "is_environment_valid" {
@@ -21,7 +21,7 @@ resource "null_resource" "is_environment_valid" {
 
 # Create bucket
 resource "google_storage_bucket" "storage_bucket" {
-  name               = "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.bucket_instance_suffix}"
+  name               = "${var.labels.team}-${var.labels.app}-${var.bucket_instance_suffix}"
   force_destroy      = false
   location           = var.location
   project            = var.gcp_project
@@ -34,7 +34,7 @@ resource "google_storage_bucket" "storage_bucket" {
   }
   logging {
     log_bucket        = var.log_bucket
-    log_object_prefix = "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.bucket_instance_suffix}"
+    log_object_prefix = "${var.labels.team}-${var.labels.app}-${var.bucket_instance_suffix}"
   }
 }
 
@@ -68,7 +68,7 @@ resource "kubernetes_secret" "storage_bucket_service_account_credentials" {
     google_storage_bucket.storage_bucket
   ]
   metadata {
-    name      = "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.bucket_instance_suffix}-credentials"
+    name      = "${var.labels.team}-${var.labels.app}-${var.bucket_instance_suffix}-credentials"
     namespace = var.kubernetes_namespace
   }
   data = {

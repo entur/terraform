@@ -22,8 +22,7 @@ variable "kubernetes_namespace" {
 }
 
 variable "bucket_instance_suffix" {
-  description = "A suffix for the bucket instance, may be changed if environment is destroyed and then needed again (name collision workaround)"
-  default     = "bucket"
+  description = "A suffix for the bucket instance, may be changed if environment is destroyed and then needed again (name collision workaround) - also bucket names must be globally unique"
 }
 
 variable "storage_class" {
