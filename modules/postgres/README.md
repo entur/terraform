@@ -26,9 +26,9 @@ Creates a postgresql named **team-app-namespace-suffix**: `${var.labels.team}-${
   - Render: `awesomeblog-db-credentials`
     - given
       - app = `awesomeblog`
-- `${var.labels.app}-instance-credentials` with `{ credentials.json: "PRIVATEKEY" }`
+- `${var.labels.app}-instance-credentials` with `{ credentials.json: "PRIVATEKEY", INSTANCES: "CLOUDSQL_CONNECTION_STRING" }`
   - `[app]-instance-credentials`
-  - Contains the credentials.json service account credentials
+  - Contains the credentials.json service account credentials and the connection string used by cloudsql_proxy
   - Render: `awesomeblog-instance-credentials`
     - given
       - app = `awesomeblog`

@@ -95,6 +95,7 @@ resource "kubernetes_secret" "team-instance-credentials" {
     labels    = var.labels
   }
   data = {
-    "credentials.json" = "${base64decode(google_service_account_key.team-instance-credentials.private_key)}"
+    "credentials.json" = base64decode(google_service_account_key.team-instance-credentials.private_key)
+    INSTANCES          = "${module.sql-db_postgresql.instance_connection_name}=tcp:5432"
   }
 }
