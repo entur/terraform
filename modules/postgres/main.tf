@@ -39,7 +39,7 @@ module "sql-db_postgresql" {
   version = "2.0.0"
 
   database_version = var.postgresql_version
-  name             = length(var.db_instance_custom_name) > 0 ? var.db_instance_custom_name : "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}${var.db_instance_random_suffix_append ? random_id.suffix.hex : "-${var.db_instance_suffix}"}"
+  name             = length(var.db_instance_custom_name) > 0 ? var.db_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}${var.db_instance_random_suffix_append ? random_id.suffix.hex : "-${var.db_instance_suffix}"}"
   project_id       = var.gcp_project
   region           = var.region
   zone             = var.zoneLetter
