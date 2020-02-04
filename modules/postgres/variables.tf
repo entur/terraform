@@ -39,8 +39,19 @@ variable "postgresql_version" {
 }
 
 variable "db_instance_suffix" {
-  description = "A suffix for the database instance, may be changed if environment is destroyed and then needed again (name collision workaround)"
-  default     = "postgres"
+  description = "A static suffix for the database instance name (including separator, i.e. '-db')"
+  default     = ""
+}
+
+variable "db_instance_random_suffix_append" {
+  description = "Append additional random suffix to database instance name, to avoid name collision"
+  type        = bool
+  default     = true
+}
+
+variable "db_instance_random_suffix_length" {
+  description = "Random database instance name suffix length (in bytes, i.e. 2 bytes = 4 char)"
+  default     = 2
 }
 
 variable "db_instance_backup_enabled" {

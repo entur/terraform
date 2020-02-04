@@ -37,9 +37,10 @@ resource "google_project_iam_member" "project" {
 module "sql-db_postgresql" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
   version = "2.0.0"
+
   # insert the 4 required variables here
   database_version = var.postgresql_version
-  name             = "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.db_instance_suffix}"
+  name             = "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}${var.db_instance_random_suffix_append ? random_id.suffix.hex : var.db_instance_suffix}"
   project_id       = var.gcp_project
   region           = var.region
   zone             = var.zoneLetter
@@ -52,6 +53,7 @@ module "sql-db_postgresql" {
     require_ssl         = true
     authorized_networks = []
   }
+  
 
   user_name = var.db_user
 
@@ -71,6 +73,11 @@ resource "random_id" "protector" {
   lifecycle {
     prevent_destroy = true
   }
+}
+
+resource "random_id" "suffix" {
+    byte_length = var.db_instance_random_suffix_length > 0 ? var.db_instance_random_suffix_length : 1
+    prefix = var.db_instance_random_suffix_length > 0 ? "${var.db_instance_suffix}-" : var.db_instance_suffix
 }
 
 resource "kubernetes_secret" "team-db-credentials" {
