@@ -22,7 +22,7 @@ resource "null_resource" "is_environment_valid" {
 # Create bucket
 resource "google_storage_bucket" "storage_bucket" {
   name               = "${var.labels.team}-${var.labels.app}-${var.bucket_instance_suffix}"
-  force_destroy      = false
+  force_destroy      = var.force_destroy
   location           = var.location
   project            = var.gcp_project
   storage_class      = var.storage_class

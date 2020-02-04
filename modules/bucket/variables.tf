@@ -25,6 +25,11 @@ variable "bucket_instance_suffix" {
   description = "A suffix for the bucket instance, may be changed if environment is destroyed and then needed again (name collision workaround) - also bucket names must be globally unique"
 }
 
+variable "force_destroy" {
+  description = "(Optional, Default: false) When deleting a bucket, this boolean option will delete all contained objects. If you try to delete a bucket that contains objects, Terraform will fail that run"
+  default     = false
+}
+
 variable "storage_class" {
   description = "GCP storage class"
   default     = "REGIONAL"
