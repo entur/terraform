@@ -45,6 +45,7 @@ Creates a postgresql named **team-app-namespace-suffix**: `${var.labels.team}-${
 | labels.app | The name of this application / workload | string | n/a | yes |
 | kubernetes_namespace | The namespace you wish to target. This is the namespace that the secrets will be stored in | string | n/a | yes |
 | prevent_destroy | Prevents the destruction of the bucket | bool | false | no |
+| db_instance_custom_name | Database instance name override | string | n/a | no |
 | db_instance_suffix | A static suffix for the database instance name | string | n/a | no |
 | db_instance_random_suffix_append | Append additional random suffix to database instance name | bool | true | no |
 | db_instance_random_suffix_length | Random database instance name suffix length (bytes) | int | 2 | no |

@@ -38,9 +38,14 @@ variable "postgresql_version" {
   default     = "POSTGRES_9_6"
 }
 
-variable "db_instance_suffix" {
-  description = "A static suffix for the database instance name (including separator, i.e. '-db')"
+variable "db_instance_custom_name" {
+  description = "Database instance name override (empty string = disabled)"
   default     = ""
+}
+
+variable "db_instance_suffix" {
+  description = "A static suffix for the database instance name"
+  default     = "postgres"
 }
 
 variable "db_instance_random_suffix_append" {
