@@ -42,9 +42,15 @@ Creates a postgresql named **team-app-namespace-suffix**: `${var.labels.team}-${
 | zoneLetter | The default zone [a,b,c,d,e etc] | string | n/a | yes |
 | labels | The labels you wish to decorate with | string | n/a | yes |
 | labels.team | The name of your team or department | string | n/a | yes |
-| labels.app | The name of this appliation / workload | string | n/a | yes |
+| labels.app | The name of this application / workload | string | n/a | yes |
 | kubernetes_namespace | The namespace you wish to target. This is the namespace that the secrets will be stored in | string | n/a | yes |
 | prevent_destroy | Prevents the destruction of the bucket | bool | false | no |
+| db_instance_custom_name | Database instance name override | string | n/a | no |
+| db_instance_backup_enabled | Enable database backup | bool | true | no |
+| db_instance_backup_time | When the backup should be scheduled | string | "04:00" | no |
+| db_name | Name of the default database | string | n/a | no |
+| db_user | Default user for database | string | n/a | no |
+| postgresql_version | Which version to use | string | "POSTGRES_9_6" | no |
 
 ## Outputs
 

@@ -38,9 +38,9 @@ variable "postgresql_version" {
   default     = "POSTGRES_9_6"
 }
 
-variable "db_instance_suffix" {
-  description = "A suffix for the database instance, may be changed if environment is destroyed and then needed again (name collision workaround)"
-  default     = "postgres"
+variable "db_instance_custom_name" {
+  description = "Database instance name override (empty string = use standard convention)"
+  default     = ""
 }
 
 variable "db_instance_backup_enabled" {
