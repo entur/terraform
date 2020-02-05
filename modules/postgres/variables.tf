@@ -39,24 +39,8 @@ variable "postgresql_version" {
 }
 
 variable "db_instance_custom_name" {
-  description = "Database instance name override (empty string = disabled)"
+  description = "Database instance name override (empty string = use standard convention)"
   default     = ""
-}
-
-variable "db_instance_suffix" {
-  description = "A static suffix for the database instance name"
-  default     = "postgres"
-}
-
-variable "db_instance_random_suffix_append" {
-  description = "Append additional random suffix to database instance name, to avoid name collision"
-  type        = bool
-  default     = true
-}
-
-variable "db_instance_random_suffix_length" {
-  description = "Random database instance name suffix length (in bytes, i.e. 2 bytes = 4 char)"
-  default     = 2
 }
 
 variable "db_instance_backup_enabled" {

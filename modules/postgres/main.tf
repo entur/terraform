@@ -39,7 +39,7 @@ module "sql-db_postgresql" {
   version = "2.0.0"
 
   database_version = var.postgresql_version
-  name             = length(var.db_instance_custom_name) > 0 ? var.db_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}${var.db_instance_random_suffix_append ? random_id.suffix.hex : "-${var.db_instance_suffix}"}"
+  name             = length(var.db_instance_custom_name) > 0 ? var.db_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
   project_id       = var.gcp_project
   region           = var.region
   zone             = var.zoneLetter
@@ -74,8 +74,7 @@ resource "random_id" "protector" {
 }
 
 resource "random_id" "suffix" {
-    byte_length = var.db_instance_random_suffix_length > 0 ? var.db_instance_random_suffix_length : 1
-    prefix = length(var.db_instance_suffix) > 0 ? "-${var.db_instance_suffix}-" : "-"
+    byte_length = 2
 }
 
 resource "kubernetes_secret" "team-db-credentials" {
