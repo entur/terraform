@@ -57,3 +57,6 @@ Creates a postgresql named **team-app-namespace-suffix**: `${var.labels.team}-${
 | Name | Description |
 |------|-------------|
 | sql-db-generated-user-password | The database password, also stored in ${var.labels.app}-db-credentials |
+| sql-db-instance_name | The database instance name |
+| sql-db-instance_connection_name | The database instance connection name |
+| sql-db-instance_self_link | The database instance self link |
