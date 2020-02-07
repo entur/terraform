@@ -16,8 +16,10 @@ provider "google-beta" {
   project = var.gcp_project
   region  = var.region
   zone    = "${var.region}-${var.zoneLetter}"
+  settings {
+    tier  = var.db_instance_tier
+  }
 }
-
 resource "google_service_account" "team-instance-credentials" {
   account_id   = "${var.labels.app}-${var.kubernetes_namespace}-cred"
   display_name = "Service Account for ${var.labels.team} team SQL"

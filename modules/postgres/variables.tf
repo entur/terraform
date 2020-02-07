@@ -6,6 +6,11 @@ variable "region" {
   description = "GCP default region"
 }
 
+variable "db_instance_tier" {
+  description = "DB default tier"
+  default     = "db-n1-standard-1"
+}
+
 variable "zoneLetter" {
   description = "GCP default zone"
 }
