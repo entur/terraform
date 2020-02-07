@@ -27,8 +27,7 @@ Have fun terraforming!
 
 # Contribute
 
-This repository is automatically built (it will tag your commit with `version.YYYY-MM-dd`).
-If you ever make a breaking change, please increment the `version` portion in [config.yml](.circleci/config.yml)
+This repository is automatically built (it will tag your commit with `$NEXT_VERSION-rc$YOURBUILDNUM`) for brances, and increment patch from master.
 
 Feel free to add a module and provide a PR.
 Follow the same conventions as seen in `/modules` and `/examples`.
