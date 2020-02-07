@@ -51,8 +51,11 @@ Creates a postgresql named **team-app-namespace-suffix**: `${var.labels.team}-${
 | db_instance_custom_name | Database instance name override | string | "" | no |
 | db_instance_backup_enabled | Enable database backup | bool | true | no |
 | db_instance_backup_time | When the backup should be scheduled | string | "04:00" | no |
-| db_instance_tier | The tier for the master instance. | string | "db-f1-micro" | no |
-| db_instance_disk_size | The disk size for the master instance. | string | "10" | no |
+| db_instance_tier | The tier for the master instance | string | "db-f1-micro" | no |
+| db_instance_disk_size | The disk size for the master instance | string | "10" | no |
+| create_timeout | The optional timout that is applied to limit long database creates | string | "10m" | no |
+| delete_timeout | The optional timout that is applied to limit long database deletes | string | "10m" | no |
+| update_timeout | The optional timout that is applied to limit long database updates | string | "10m" | no |
 
 ## Outputs
 

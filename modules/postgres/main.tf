@@ -17,7 +17,7 @@ provider "google-beta" {
   region  = var.region
   zone    = "${var.region}-${var.zoneLetter}"
   settings {
-    tier  = var.db_instance_tier
+    tier = var.db_instance_tier
   }
 }
 resource "google_service_account" "team-instance-credentials" {
@@ -62,6 +62,9 @@ module "sql-db_postgresql" {
     start_time         = var.db_instance_backup_time
     binary_log_enabled = false #cannot be used with postgres
   }
+  create_timeout = var.create_timeout
+  delete_timeout = var.delete_timeout
+  update_timeout = var.update_timeout
 }
 
 resource "random_id" "protector" {
@@ -76,7 +79,7 @@ resource "random_id" "protector" {
 }
 
 resource "random_id" "suffix" {
-    byte_length = 2
+  byte_length = 2
 }
 
 resource "kubernetes_secret" "team-db-credentials" {
