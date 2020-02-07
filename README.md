@@ -9,7 +9,7 @@ Locate a [release](https://github.com/entur/terraform/releases) and update `sour
 
 ```hcl
 module "postgres" {
-  source               = "github.com/entur/terraform//modules/postgres?ref=v1.2020-01-29"
+  source               = "github.com/entur/terraform//modules/postgres?ref=0.0.6"
 }
 ```
 
@@ -18,64 +18,12 @@ Have fun terraforming!
 # Available Modules
 
 ## [Postgres](./modules/postgres)
-
-```hcl
-module "postgres" {
-  source               = "github.com/entur/terraform//modules/postgres"
-  gcp_project          = "your-gcp-project"
-  labels               = {
-    team = "myteam"
-    app  = "mypp"
-  }
-  kubernetes_namespace = "default"
-  db_name              = "example"
-  db_user              = "example-user"
-  region               = "europe-west1"
-  zoneLetter           = "d"
-}
-```
     
 ## [Redis](./modules/redis)
 
-```hcl
-module "redis" {
-  source               = "github.com/entur/terraform//modules/redis"
-  gcp_project          = "your-project"
-  labels               = {
-    team = "myteam"
-    app  = "mypp"
-  }
-  kubernetes_namespace = "default"
-  zone                 = "europe-west1-d"
-  reserved_ip_range    = "10.100.10.8/29"
-}
-```
-
 ## [Bucket](./modules/bucket)
 
-```hcl
-module "bucket" {
-  source                      = "github.com/entur/terraform//modules/bucket"
-  labels                      = {}
-  gcp_project                 = "your-project"
-  location                    = "europe-west1"
-  storage_class               = "REGIONAL"
-  kubernetes_namespace        = "default"
-  service_account_bucket_role = "READER"
-}
-```
-
 ## [Secret](./modules/secret)
-
-```hcl
-module "my-secret" {
-  source               = "github.com/entur/terraform//modules/secret"
-  secret_name          = var.secret_name
-  kubernetes_namespace = var.kubernetes_namespace
-  labels               = var.labels
-  secret_data          = var.secret_data
-}
-```
 
 # Contribute
 
