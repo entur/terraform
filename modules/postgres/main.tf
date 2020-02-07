@@ -16,10 +16,8 @@ provider "google-beta" {
   project = var.gcp_project
   region  = var.region
   zone    = "${var.region}-${var.zoneLetter}"
-  settings {
-    tier = var.db_instance_tier
-  }
 }
+
 resource "google_service_account" "team-instance-credentials" {
   account_id   = "${var.labels.app}-${var.kubernetes_namespace}-cred"
   display_name = "Service Account for ${var.labels.team} team SQL"
@@ -47,6 +45,9 @@ module "sql-db_postgresql" {
   zone             = var.zoneLetter
   user_labels      = var.labels
   db_name          = var.db_name
+  tier             = var.db_instance_tier
+  disk_size        = var.db_instance_disk_size
+
 
   ip_configuration = {
     ipv4_enabled        = true
