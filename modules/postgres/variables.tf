@@ -1,3 +1,6 @@
+#
+# Variables that needs a value
+#
 variable "gcp_project" {
   description = "The GCP project id"
 }
@@ -14,9 +17,7 @@ variable "labels" {
   description = "Labels used in all resources"
   type        = map(string)
   #default = {
-  #  manager = "terraform"
   #  team    = "TEAM"
-  #  slack   = "talk-TEAM"
   #  app     = "SERVICE"
   #}
 }
@@ -31,6 +32,15 @@ variable "db_name" {
 
 variable "db_user" {
   description = "Default user for postgres db"
+}
+
+#
+# Variables with default value
+#
+variable "prevent_destroy" {
+  description = "Prevent the destruction of this postgres database"
+  type        = bool
+  default     = false
 }
 
 variable "postgresql_version" {
@@ -53,11 +63,28 @@ variable "db_instance_backup_time" {
   default     = "04:00"
 }
 
-variable "prevent_destroy" {
-  description = "Prevent the destruction of this postgres database"
-  type        = bool
-  default     = false
+variable "db_instance_tier" {
+  description = "DB default tier"
+  default     = "db-f1-micro"
 }
 
+variable "db_instance_disk_size" {
+  description = "DB disc size"
+  default     = "10"
+}
 
+# Timeouts
+variable "create_timeout" {
+  description = "The optional timout that is applied to limit long database creates."
+  default     = "10m"
+}
 
+variable "delete_timeout" {
+  description = "The optional timout that is applied to limit long database deletes."
+  default     = "10m"
+}
+
+variable "update_timeout" {
+  description = "The optional timout that is applied to limit long database updates."
+  default     = "10m"
+}

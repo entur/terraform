@@ -45,6 +45,9 @@ module "sql-db_postgresql" {
   zone             = var.zoneLetter
   user_labels      = var.labels
   db_name          = var.db_name
+  tier             = var.db_instance_tier
+  disk_size        = var.db_instance_disk_size
+
 
   ip_configuration = {
     ipv4_enabled        = true
@@ -60,6 +63,9 @@ module "sql-db_postgresql" {
     start_time         = var.db_instance_backup_time
     binary_log_enabled = false #cannot be used with postgres
   }
+  create_timeout = var.create_timeout
+  delete_timeout = var.delete_timeout
+  update_timeout = var.update_timeout
 }
 
 resource "random_id" "protector" {
@@ -74,7 +80,7 @@ resource "random_id" "protector" {
 }
 
 resource "random_id" "suffix" {
-    byte_length = 2
+  byte_length = 2
 }
 
 resource "kubernetes_secret" "team-db-credentials" {

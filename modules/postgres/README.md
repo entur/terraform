@@ -44,13 +44,20 @@ Creates a postgresql named **team-app-namespace-suffix**: `${var.labels.team}-${
 | labels.team | The name of your team or department | string | n/a | yes |
 | labels.app | The name of this application / workload | string | n/a | yes |
 | kubernetes_namespace | The namespace you wish to target. This is the namespace that the secrets will be stored in | string | n/a | yes |
+| db_name | Name of the default database | string | n/a | yes |
+| db_user | Default user for database | string | n/a | yes |
 | prevent_destroy | Prevents the destruction of the bucket | bool | false | no |
-| db_instance_custom_name | Database instance name override | string | n/a | no |
+| postgresql_version | Which version to use | string | "POSTGRES_9_6" | no |
+| db_instance_custom_name | Database instance name override | string | "" | no |
 | db_instance_backup_enabled | Enable database backup | bool | true | no |
 | db_instance_backup_time | When the backup should be scheduled | string | "04:00" | no |
-| db_name | Name of the default database | string | n/a | no |
-| db_user | Default user for database | string | n/a | no |
-| postgresql_version | Which version to use | string | "POSTGRES_9_6" | no |
+| db_instance_tier | The tier for the master instance | string | "db-f1-micro" | no |
+| db_instance_disk_size | The disk size for the master instance | string | "10" | no |
+| create_timeout | The optional timout that is applied to limit long database creates | string | "10m" | no |
+| delete_timeout | The optional timout that is applied to limit long database deletes | string | "10m" | no |
+| update_timeout | The optional timout that is applied to limit long database updates | string | "10m" | no |
+
+> FYI: The auto-resize flag is set, and you cannot change the `db_instance_disk_size` after terraform apply. Use this flag only if you know why you are doing so.
 
 ## Outputs
 
