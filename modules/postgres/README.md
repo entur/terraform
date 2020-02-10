@@ -4,7 +4,7 @@ This module can be used to quickly get a postgresql up and running according to 
 
 ## Main effect
 
-Creates a postgresql named **team-app-namespace-suffix**: `${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.db_instance_suffix}`.
+Creates a postgresql named **app-namespace-suffix**: `${var.labels.app}-${var.kubernetes_namespace}-${auto_random_suffix}`.
 
 ## Side effects
 
