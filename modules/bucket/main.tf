@@ -2,11 +2,6 @@ terraform {
   required_version = ">= 0.12"
 }
 
-provider "kubernetes" {
-  version = "~> 1.10"
-  # host    = "127.0.0.1:8001" // kubectl proxy
-}
-
 provider "google" {
   version = "~> 2.19"
 }
@@ -77,8 +72,8 @@ resource "kubernetes_secret" "storage_bucket_service_account_credentials" {
 }
 
 # add service account as member to the bucket
-resource "google_storage_bucket_access_control" "storage_bucket_access_control" {
+resource "google_storage_bucket_iam_member" "storage_bucket_iam_member" {
   bucket = google_storage_bucket.storage_bucket.name
   role   = var.service_account_bucket_role
-  entity = "user-${google_service_account.storage_bucket_service_account.email}"
+  member = "serviceAccount:${google_service_account.storage_bucket_service_account.email}"
 }
