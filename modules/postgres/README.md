@@ -57,7 +57,7 @@ Creates a postgresql named **team-app-namespace-suffix**: `${var.labels.team}-${
 | delete_timeout | The optional timout that is applied to limit long database deletes | string | "10m" | no |
 | update_timeout | The optional timout that is applied to limit long database updates | string | "10m" | no |
 
-> FYI: The auto-resize flag is set, and you cannot change the `db_instance_disk_size` after terraform apply. Use this flag only if you know why you are doing so.
+> FYI: The auto-resize flag is set. `db_instance_disk_size` only takes effect on initial apply. If manual resize is required, use the Google Console.
 
 ## Outputs
 
