@@ -15,12 +15,6 @@ variable "zone_letter" {
   default     = "d"
 }
 
-variable "db_instance_tier" {
-  description = "The tier for the master instance."
-  type        = string
-  default     = "db-f1-micro"
-}
-
 variable "labels" {
   description = "Labels used in all resources"
   type        = map(string)
