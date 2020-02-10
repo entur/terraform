@@ -58,7 +58,8 @@ Creates a postgresql named **app-namespace-suffix**: `${var.labels.app}-${var.ku
 | update_timeout | The optional timout that is applied to limit long database updates | string | "10m" | no |
 
 > FYI: The auto-resize flag is set. `db_instance_disk_size` only takes effect on initial apply. If manual resize is required, use the Google Console.
-> [Accepted Postgres db tiers](https://cloud.google.com/sql/docs/postgres/create-instance#machine-types) that can be used. Default `db_instance_tier` has 1 CPU and 4Gb RAM. 
+> 
+>[Accepted Postgres db tiers](https://cloud.google.com/sql/docs/postgres/create-instance#machine-types) that can be used. Default `db_instance_tier` has 1 CPU and 4Gb RAM. 
 
 ## Outputs
 
