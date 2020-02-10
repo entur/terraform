@@ -2,11 +2,6 @@ terraform {
   required_version = ">= 0.12"
 }
 
-provider "kubernetes" {
-  version = "~> 1.10"
-  host    = "127.0.0.1:8001" // kubectl proxy
-}
-
 provider "google" {
   version = "~> 2.19"
 }
