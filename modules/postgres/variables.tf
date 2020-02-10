@@ -65,7 +65,7 @@ variable "db_instance_backup_time" {
 
 variable "db_instance_tier" {
   description = "DB default tier"
-  default     = "db-custom-1-4096"
+  default     = "db-custom-1-3840"
 }
 
 variable "db_instance_disk_size" {

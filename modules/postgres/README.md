@@ -51,7 +51,7 @@ Creates a postgresql named **app-namespace-suffix**: `${var.labels.app}-${var.ku
 | db_instance_custom_name | Database instance name override | string | "" | no |
 | db_instance_backup_enabled | Enable database backup | bool | true | no |
 | db_instance_backup_time | When the backup should be scheduled | string | "04:00" | no |
-| db_instance_tier | The tier for the master instance | string | "db-custom-1-4096" | no |
+| db_instance_tier | The tier for the master instance | string | "db-custom-1-3840" | no |
 | db_instance_disk_size | The disk size for the master instance | string | "10" | no |
 | create_timeout | The optional timout that is applied to limit long database creates | string | "10m" | no |
 | delete_timeout | The optional timout that is applied to limit long database deletes | string | "10m" | no |
@@ -59,7 +59,7 @@ Creates a postgresql named **app-namespace-suffix**: `${var.labels.app}-${var.ku
 
 > FYI: The auto-resize flag is set. `db_instance_disk_size` only takes effect on initial apply. If manual resize is required, use the Google Console.
 > 
->[Accepted Postgres db tiers](https://cloud.google.com/sql/docs/postgres/create-instance#machine-types) that can be used. Default `db_instance_tier` has 1 CPU and 4Gb RAM. 
+>[Accepted Postgres db tiers](https://cloud.google.com/sql/docs/postgres/create-instance#machine-types) that can be used. Default `db_instance_tier` has 1 CPU and 3,75Gb RAM. 
 
 ## Outputs
 
