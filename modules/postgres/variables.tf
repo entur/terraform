@@ -22,6 +22,11 @@ variable "labels" {
   #}
 }
 
+variable "availability_type" {
+  description = "The availability type for the master instance.This is only used to set up high availability for the PostgreSQL instance. Can be eitherZONAL orREGIONAL."
+  default     = "ZONAL"
+}
+
 variable "kubernetes_namespace" {
   description = "Your kubernetes namespace"
 }

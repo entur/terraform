@@ -38,15 +38,16 @@ module "sql-db_postgresql" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
   version = "2.0.0"
 
-  database_version = var.postgresql_version
-  name             = length(var.db_instance_custom_name) > 0 ? var.db_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
-  project_id       = var.gcp_project
-  region           = var.region
-  zone             = var.zoneLetter
-  user_labels      = var.labels
-  db_name          = var.db_name
-  tier             = var.db_instance_tier
-  disk_size        = var.db_instance_disk_size
+  database_version  = var.postgresql_version
+  name              = length(var.db_instance_custom_name) > 0 ? var.db_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
+  project_id        = var.gcp_project
+  region            = var.region
+  zone              = var.zoneLetter
+  user_labels       = var.labels
+  db_name           = var.db_name
+  tier              = var.db_instance_tier
+  disk_size         = var.db_instance_disk_size
+  availability_type = var.availability_type
 
 
   ip_configuration = {

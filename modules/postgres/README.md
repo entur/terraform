@@ -46,6 +46,7 @@ Creates a postgresql named **app-namespace-suffix**: `${var.labels.app}-${var.ku
 | kubernetes_namespace | The namespace you wish to target. This is the namespace that the secrets will be stored in | string | n/a | yes |
 | db_name | Name of the default database | string | n/a | yes |
 | db_user | Default user for database | string | n/a | yes |
+| availability_type | ZONAL or REGIONAL | STRING | ZONAL | no
 | prevent_destroy | Prevents the destruction of the bucket | bool | false | no |
 | postgresql_version | Which version to use | string | "POSTGRES_9_6" | no |
 | db_instance_custom_name | Database instance name override | string | "" | no |
