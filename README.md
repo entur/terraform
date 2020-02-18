@@ -17,11 +17,13 @@ Have fun terraforming!
 
 # Available Modules
 
+## [Bucket](./modules/bucket)
+
+## [Entur](./modules/entur)
+
 ## [Postgres](./modules/postgres)
     
 ## [Redis](./modules/redis)
-
-## [Bucket](./modules/bucket)
 
 ## [Secret](./modules/secret)
 
