@@ -41,3 +41,9 @@ variable "enable_apis" {
   type        = bool
   default     = false
 }
+
+variable "disable_on_destroy" {
+  description = "Disable the service when the terraform resource is destroyed"
+  type        = bool
+  default     = false
+}

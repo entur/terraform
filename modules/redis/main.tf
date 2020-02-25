@@ -52,3 +52,11 @@ resource "kubernetes_config_map" "team-redis-configmap" {
     REDIS_HOST = module.memorystore.host
   }
 }
+
+resource "google_project_service" "project" {
+  project = var.gcp_project
+  service = "iam.googleapis.com"
+
+  disable_dependent_services = var.disable_dependent_services
+  disable_on_destroy         = var.disable_on_destroy
+}
