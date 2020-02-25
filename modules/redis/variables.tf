@@ -47,9 +47,3 @@ variable "disable_on_destroy" {
   type        = bool
   default     = false
 }
-
-variable "disable_dependent_services" {
-  description = "Services that are enabled and which depend on this service should also be disabled when this service is destroyed. "
-  type        = bool
-  default     = false
-}

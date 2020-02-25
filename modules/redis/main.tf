@@ -53,10 +53,14 @@ resource "kubernetes_config_map" "team-redis-configmap" {
   }
 }
 
-resource "google_project_service" "project" {
-  project = var.gcp_project
-  service = "iam.googleapis.com"
+resource "google_project_service" "service" {
+  for_each = toset([
+    "iam.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
+  ])
 
-  disable_dependent_services = var.disable_dependent_services
-  disable_on_destroy         = var.disable_on_destroy
+  service = each.key
+
+  project = var.gcp_project
+  disable_on_destroy = var.disable_on_destroy
 }
