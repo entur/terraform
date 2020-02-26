@@ -35,3 +35,9 @@ variable "prevent_destroy" {
   type        = bool
   default     = false
 }
+
+variable "enable_apis" {
+  description = "Flag for enabling redis API in your project"
+  type        = bool
+  default     = false
+}

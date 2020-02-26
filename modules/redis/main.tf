@@ -19,6 +19,7 @@ module "memorystore" {
   location_id        = var.zone
   authorized_network = "${data.google_compute_network.default-network.self_link}"
 
+  enable_apis = "${var.enable_apis}"
 
   reserved_ip_range = var.reserved_ip_range
 
