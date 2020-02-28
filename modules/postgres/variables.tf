@@ -58,6 +58,16 @@ variable "db_instance_custom_name" {
   default     = ""
 }
 
+variable "account_id" {
+  description = "Database service account id override (empty string = use standard convention)"
+  default     = ""
+}
+
+variable "account_id_use_existing" {
+  description = "Set this to true if you want to use an existing service account, otherwise a new one will be created (account_id must also be provided if set to true)"
+  default     = false
+}
+
 variable "db_instance_backup_enabled" {
   description = "Enable database backup"
   default     = true
