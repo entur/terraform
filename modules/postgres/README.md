@@ -54,9 +54,11 @@ Creates a postgresql named **app-namespace-suffix**: `${var.labels.app}-${var.ku
 | db_instance_backup_time | When the backup should be scheduled | string | "04:00" | no |
 | db_instance_tier | The tier for the master instance | string | "db-custom-1-3840" | no |
 | db_instance_disk_size | The disk size for the master instance | string | "10" | no |
-| create_timeout | The optional timout that is applied to limit long database creates | string | "10m" | no |
-| delete_timeout | The optional timout that is applied to limit long database deletes | string | "10m" | no |
-| update_timeout | The optional timout that is applied to limit long database updates | string | "10m" | no |
+| create_timeout | The optional timeout that is applied to limit long database creates | string | "10m" | no |
+| delete_timeout | The optional timeout that is applied to limit long database deletes | string | "10m" | no |
+| update_timeout | The optional timeout that is applied to limit long database updates | string | "10m" | no |
+| account_id | Database service account id (name) override | string | "" | no |
+| account_id_use_existing | Set this to true if you want to use an existing service account | bool | false | no |
 
 > FYI: The auto-resize flag is set. `db_instance_disk_size` only takes effect on initial apply. If manual resize is required, use the Google Console.
 > 
