@@ -21,7 +21,8 @@ provider "google-beta" {
 resource "google_service_account" "team-instance-credentials" {
   count = var.account_id_use_existing == true ? 0 : 1
   account_id   = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}-cred"
-  display_name = "Service Account for ${var.labels.team} team SQL"
+  display_name   = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}-cred"
+  description = "Service Account for ${var.labels.app} SQL"
 }
 
 resource "google_service_account_key" "team-instance-credentials" {
