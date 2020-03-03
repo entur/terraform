@@ -19,18 +19,21 @@ provider "google-beta" {
 }
 
 resource "google_service_account" "team-instance-credentials" {
-  account_id   = "${var.labels.app}-${var.kubernetes_namespace}-cred"
-  display_name = "Service Account for ${var.labels.team} team SQL"
+  count = var.account_id_use_existing == true ? 0 : 1
+  account_id   = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}-cred"
+  display_name   = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}-cred"
+  description = "Service Account for ${var.labels.app} SQL"
 }
 
 resource "google_service_account_key" "team-instance-credentials" {
-  service_account_id = google_service_account.team-instance-credentials.name
+  service_account_id = var.account_id_use_existing == true ? var.account_id : google_service_account.team-instance-credentials[0].name
 }
 
 resource "google_project_iam_member" "project" {
+  count = var.account_id_use_existing == true ? 0 : 1
   project = var.gcp_project
   role    = "roles/cloudsql.client"
-  member  = "serviceAccount:${google_service_account.team-instance-credentials.email}"
+  member  = "serviceAccount:${google_service_account.team-instance-credentials[0].email}"
 }
 
 //https://registry.terraform.io/modules/GoogleCloudPlatform/sql-db/google/2.0.0/submodules/postgresql
