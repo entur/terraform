@@ -25,9 +25,9 @@ variable "kubernetes_namespace" {
   description = "Your kubernetes namespace"
 }
 
-variable "redis_instance_suffix" {
-  description = "A suffix for the database instance, may be changed if environment is destroyed and then needed again (name collision workaround)"
-  default     = "redis"
+variable "redis_instance_custom_name" {
+  description = "Redis instance name override (empty string = use standard convention)"
+  default     = ""
 }
 
 variable "prevent_destroy" {
