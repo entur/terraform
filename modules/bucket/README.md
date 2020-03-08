@@ -4,7 +4,7 @@ This module can be used to quickly get a bucket up and running according to Entu
 
 ## Main effect
 
-Creates a bucket named **team-app-namespace-suffix**: `${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.bucket_instance_suffix}`.
+Creates a bucket named **app-namespace-suffix**: `${var.labels.app}-${var.kubernetes_namespace}`.
 
 > NB: The total length of the bucket name cannot exceed 30 characters.
 
@@ -12,28 +12,23 @@ Creates a bucket named **team-app-namespace-suffix**: `${var.labels.team}-${var.
 
 ### Generated Service Account:
 
-- `${var.labels.app}-${substr(var.kubernetes_namespace,0,3)}-${var.bucket_instance_suffix}`
-  - `[app]-[nam(espace)]-[suffix]`
+- `${var.labels.app}-${var.kubernetes_namespace}`
+  - `[app]-[namespace]`
   - Name of the Service Account used by this bucket (name length < 30)
   - Render: `awesome-pro-bucket`
     - given
       - app = `awesomeblog`
       - namespace = `production`
-      - suffix = `bucket`
-
-This seems odd, but stems from the fact that bucket SA cannot be named more than 30 characters longl
 
 ### Generated Kubernetes Secrets:
 
-- `${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.bucket_instance_suffix}-credentials` with `{ credentials.json: "PRIVATEKEY" }`
-  - `[team]-[app]-[namespace]-[suffix]-credentials`
+- `${var.labels.app}-bucket-credentials` with `{ credentials.json: "PRIVATEKEY" }`
+  - `[app]-[namespace]-bucket-credentials`
   - Contains the credentials.json service account credentials
-  - Render: `ninja-blog-dev-bucket-credentials`
+  - Render: `blog-bucket-credentials`
     - given
-      - team = `ninja`
       - app = `awesomeblog`
       - namespace = `production`
-      - suffix = `bucket`
 
 ## Inputs
 
@@ -47,12 +42,13 @@ This seems odd, but stems from the fact that bucket SA cannot be named more than
 | location | The location of your bucket | string | n/a | yes |
 | kubernetes_namespace | The namespace you wish to target. This is the namespace that the secrets will be stored in | string | n/a | yes |
 | prevent_destroy | Prevents the destruction of the bucket | bool | false | no |
-| bucket_instance_suffix | A suffix that is added to the bucket, this can be used as a workaround for destroying and creating a bucket (naming collision) | string | "bucket" | no |
-| storage_class | The storage class of the bucket | string | "RGIONAL" | no |
+| storage_class | The storage class of the bucket | string | "REGIONAL" | no |
 | versioning | Should bucket be versioned? | bool | true | no |
 | log_bucket | The bucket's Access & Storage Logs configuration | bool | false | no |
 | bucket_policy_only | Enables Bucket Policy Only access to a bucket | bool | false | no |
-| service_account_bucket_role | Role of the Service Account | string | "READER" | no |
+| service_account_bucket_role | Role of the Service Account | string | "roles/storage.objectViewer" | no |
+| account_id | Storage service account id (name) override | string | "" | no |
+| account_id_use_existing | Set this to true if you want to use an existing service account | bool | false | no |
 
 ## Outputs
 

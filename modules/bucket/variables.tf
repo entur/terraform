@@ -21,10 +21,6 @@ variable "kubernetes_namespace" {
   description = "Your kubernetes namespace"
 }
 
-variable "bucket_instance_suffix" {
-  description = "A suffix for the bucket instance, may be changed if environment is destroyed and then needed again (name collision workaround) - also bucket names must be globally unique"
-}
-
 variable "force_destroy" {
   description = "(Optional, Default: false) When deleting a bucket, this boolean option will delete all contained objects. If you try to delete a bucket that contains objects, Terraform will fail that run"
   default     = false
@@ -59,4 +55,19 @@ variable "prevent_destroy" {
   description = "Prevent destruction of bucket"
   type        = bool
   default     = false
+}
+
+variable "account_id" {
+  description = "Bucket service account id override (empty string = use standard convention)"
+  default     = ""
+}
+
+variable "account_id_use_existing" {
+  description = "Set this to true if you want to use an existing service account, otherwise a new one will be created (account_id must also be provided if set to true)"
+  default     = false
+}
+
+variable "bucket_instance_custom_name" {
+  description = "Bucket instance name override (empty string = use standard convention)"
+  default     = ""
 }
