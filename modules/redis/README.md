@@ -4,14 +4,12 @@ This module can be used to quickly get a redis up and running according to Entur
 
 ## Main effect
 
-- `${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.redis_instance_suffix}`.
-  - `[app]-[namespace]-cred`
+- `${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}`.
+  - `[app]-[namespace]-[randomsuffix]`
   - Name of the Redis instance
-  - Render: `ninja-awesomeblog-production-redis`
-      - team = `ninja`
+  - Render: `awesomeblog-production-aa4c`
       - app = `awesomeblog`
       - namespace = `production`
-      - redis_instance_suffix = `redis`
 
 ## Side effects
 
