@@ -15,20 +15,19 @@ Creates a bucket named **app-namespace-suffix**: `${var.labels.app}-${var.kubern
 - `${var.labels.app}-${var.kubernetes_namespace}`
   - `[app]-[namespace]`
   - Name of the Service Account used by this bucket (name length < 30)
-  - Render: `awesome-pro-bucket`
+  - Render: `blog-production`
     - given
-      - app = `awesomeblog`
+      - app = `blog`
       - namespace = `production`
 
 ### Generated Kubernetes Secrets:
 
 - `${var.labels.app}-bucket-credentials` with `{ credentials.json: "PRIVATEKEY" }`
-  - `[app]-[namespace]-bucket-credentials`
+  - `[app]-bucket-credentials`
   - Contains the credentials.json service account credentials
   - Render: `blog-bucket-credentials`
     - given
-      - app = `awesomeblog`
-      - namespace = `production`
+      - app = `blog`
 
 ## Inputs
 
