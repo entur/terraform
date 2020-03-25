@@ -4,14 +4,12 @@ This module can be used to quickly get a redis up and running according to Entur
 
 ## Main effect
 
-- `${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.redis_instance_suffix}`.
-  - `[app]-[namespace]-cred`
+- `${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}`.
+  - `[app]-[namespace]-[randomsuffix]`
   - Name of the Redis instance
-  - Render: `ninja-awesomeblog-production-redis`
-      - team = `ninja`
+  - Render: `awesomeblog-production-aa4c`
       - app = `awesomeblog`
       - namespace = `production`
-      - redis_instance_suffix = `redis`
 
 ## Side effects
 
@@ -35,7 +33,7 @@ Generated Kubernetes Config Map:
 | reserved_ip_range | The reserved IP range in CIDR notation | string | n/a | yes |
 | kubernetes_namespace | The namespace you wish to target. Note, this is only here to allow separate envs to have different redis instances. They do not actually live in the namespace. | string | n/a | yes |
 | prevent_destroy | Prevents the destruction of the bucket | bool | false | no |
-| redis_instance_suffix | The suffix of this redis instance | string | "redis" | no |
+| redis_instance_custom_name | Redis instance name override | string | n/a | no |
 | enable_apis | Flag for enabling redis API in your project | bool | false | no |
 
 ## Outputs

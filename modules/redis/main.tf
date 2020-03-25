@@ -13,7 +13,7 @@ module "memorystore" {
   source  = "terraform-google-modules/memorystore/google"
   version = "1.0.0"
 
-  name    = "${var.labels.team}-${var.labels.app}-${var.kubernetes_namespace}-${var.redis_instance_suffix}"
+  name     = length(var.redis_instance_custom_name) > 0 ? var.redis_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
   project = var.gcp_project
 
   location_id        = var.zone
@@ -35,6 +35,10 @@ resource "random_id" "protector" {
   lifecycle {
     prevent_destroy = true
   }
+}
+
+resource "random_id" "suffix" {
+  byte_length = 2
 }
 
 resource "kubernetes_config_map" "team-redis-configmap" {
