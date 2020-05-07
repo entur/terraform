@@ -52,8 +52,8 @@ resource "kubernetes_secret" "team-db-credentials" {
     host     = ibm_database.db.connectionstrings.0.hosts.0.hostname
     name     = ibm_database.db.connectionstrings.0.database
     port     = ibm_database.db.connectionstrings.0.hosts.0.port
-    username = var.db_user_name
-    password = var.db_user_pw
+    username = var.application_db_user
+    password = random_password.db_password.result
   }
 }
 
