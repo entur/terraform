@@ -15,7 +15,8 @@ locals {
 }
 
 resource "random_password" "db_password" {
-  length = 12
+  length  = 12
+  special = false
 }
 
 resource "ibm_database" "db" {
