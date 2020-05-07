@@ -61,7 +61,7 @@ resource "random_id" "protector" {
   count       = var.prevent_destroy ? 1 : 0
   byte_length = 8
   keepers = {
-    protector = ibm_database.postgres_db.name
+    protector = ibm_database.db.name
   }
   lifecycle {
     prevent_destroy = true
