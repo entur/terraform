@@ -48,7 +48,7 @@ resource "kubernetes_secret" "team-db-credentials" {
   }
   data = {
     args     = ibm_database.db.connectionstrings.0.queryoptions
-    cert     = base64decode(ibm_database.postgres_db.connectionstrings.0.certbase64)
+    cert     = base64decode(ibm_database.db.connectionstrings.0.certbase64)
     host     = ibm_database.db.connectionstrings.0.hosts.0.hostname
     name     = ibm_database.db.connectionstrings.0.database
     port     = ibm_database.db.connectionstrings.0.hosts.0.port
