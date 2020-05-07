@@ -51,9 +51,9 @@ resource "kubernetes_secret" "team-db-credentials" {
     cert     = base64decode(ibm_database.postgres_db.connectionstrings.0.certbase64)
     host     = ibm_database.db.connectionstrings.0.hosts.0.hostname
     name     = ibm_database.db.connectionstrings.0.database
-    password = var.db_user_pw
     port     = ibm_database.db.connectionstrings.0.hosts.0.port
     username = var.db_user_name
+    password = var.db_user_pw
   }
 }
 
