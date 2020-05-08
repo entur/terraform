@@ -15,7 +15,7 @@ module "postgres" {
 
 Have fun terraforming!
 
-# Available Modules
+# Available Modules for Google Cloud Platform
 
 ## [Bucket](./modules/bucket)
 
@@ -26,6 +26,10 @@ Have fun terraforming!
 ## [Redis](./modules/redis)
 
 ## [Secret](./modules/secret)
+
+# Available Modules for IBM Cloud
+
+## [IBM Database](./modules/ibm-database)
 
 # Contribute
 

@@ -4,7 +4,7 @@ This module can be used to quickly get an IBM database up and running according 
 
 ## Main effect
 
-Creates a IBM database
+Creates an IBM database for postgreSQL and mongoDB.
 
 ## Side effects
 
@@ -29,15 +29,20 @@ Creates a IBM database
 | region | The default region | string | osl01 | no |
 | application_db_user | Default application user | string | app-user | no |
 | prevent_destroy | Prevents the destruction of the database instance | bool | false | no |
-| db_type | The database type to provision | string | databases-for-postgresql | no |
+| db_type | The database type to provision* | string | databases-for-postgresql | no |
 | db_instance_plan | The database payment plan | string | standard | no |
-| db_version | Which version to use | string | "12" | no |
-| db_instance_disk_size_mb | The disk size for the database instance | string | "5120" | no |
-| db_instance_memory_mb | The allocated memory for the database instance | string | "1024" | no |
+| db_version | Which version to use** | string | "12" | no |
+| db_instance_disk_size_mb | The disk size for the database instance*** | string | "5120" | no |
+| db_instance_memory_mb | The allocated memory for the database instance | string | "1024"| no |
 | create_timeout | The optional timeout that is applied to limit long database creates | string | "60m" | no |
 | delete_timeout | The optional timeout that is applied to limit long database deletes | string | "20m" | no |
 | update_timeout | The optional timeout that is applied to limit long database updates | string | "10m" | no |
 
+  *Available(tested) parameters: "databases-for-postgresql" and "databases-for-mongodb".
+
+  **Use major versions. You can find the latest versions from the [catalog pages](https://cloud.ibm.com/catalog?category=databases)
+
+  ***MongoDB requires minimum 20480 mb disc size.
 
 ## Outputs
 
@@ -45,3 +50,5 @@ Creates a IBM database
 |------|-------------|
 | db-generated-application-password | The database password, also stored in ${var.labels.app}-db-credentials |
 | db-host_name | The database instance name |
+
+Find more in [official documentation](https://cloud.ibm.com/docs/terraform?topic=terraform-databases-resources)
