@@ -32,7 +32,7 @@ Creates an IBM database for postgreSQL and mongoDB.
 | db_type | The database type to provision* | string | databases-for-postgresql | no |
 | db_instance_plan | The database payment plan | string | standard | no |
 | db_version | Which version to use** | string | "12" | no |
-| db_instance_disk_size_mb | The disk size for the database instance*** | string | "5120" | no |
+| db_instance_disk_size_mb | The disc size for the database instance*** | string | "5120" | no |
 | db_instance_memory_mb | The allocated memory for the database instance | string | "1024"| no |
 | create_timeout | The optional timeout that is applied to limit long database creates | string | "60m" | no |
 | delete_timeout | The optional timeout that is applied to limit long database deletes | string | "20m" | no |
