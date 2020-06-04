@@ -10,12 +10,13 @@ Creates an IBM database for postgreSQL and mongoDB.
 
 ### Generated Kubernetes Secrets:
 
-- `${var.labels.app}-db-credentials` with `{ username: "USERNAME", password: "PASSWORD", name: "DATABASE_NAME", host: "DB_HOSTNAME", port: "DB_PORT", args: "DB_CONNECTION_ARGS", cert: "DB_CERT" }`
+- `${var.labels.app}-db-credentials` with `{ username: "USERNAME", password: "PASSWORD", name: "DATABASE_NAME", host: "DB_HOSTNAME", host2: "DB_HOSTNAME2"*, port: "DB_PORT", args: "DB_CONNECTION_ARGS", cert: "DB_CERT" }`
   - `[app]-instance-credentials`
   - Contains the username, password and connection information used to conenct to the database
   - Render: `awesomeblog-instance-credentials`
     - given
       - app = `awesomeblog`
+  - *only for MongoDB
 
 ## Inputs
 
@@ -49,6 +50,6 @@ Creates an IBM database for postgreSQL and mongoDB.
 | Name | Description |
 |------|-------------|
 | db-generated-application-password | The database password, also stored in ${var.labels.app}-db-credentials |
-| db-host_name | The database instance name |
+| db-host_name | The database instance name (2 hosts for MongoDB) |
 
 Find more in [official documentation](https://cloud.ibm.com/docs/terraform?topic=terraform-databases-resources)
