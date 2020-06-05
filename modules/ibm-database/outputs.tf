@@ -7,5 +7,5 @@ output "db-host_name" {
 }
 
 output "db-host_name2" {
-  value = ibm_database.db.connectionstrings.0.hosts.1.hostname
+  value = var.db_type == "databases-for-mongodb" ? ibm_database.db.connectionstrings.0.hosts.1.hostname : "no_hostname"}"
 }
