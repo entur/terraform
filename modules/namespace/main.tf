@@ -3,16 +3,17 @@ terraform {
 }
 
 locals {
-  kubernetes_namespace = var.kubernetes_namespace == "master" ? var.master_override : var.kubernetes_namespace
-  
+  prefix                = var.branch_environment ? "env-" : ""
+  kubernetes_namespace  = "${local.prefix}${var.kubernetes_namespace}"
   ns_labels = {
-    timestamp = timestamp()
+    timestamp           = timestamp()
+    branch_environment  = var.branch_environment
   }
 }
 
 resource "kubernetes_namespace" "environment" {
-  # do not try to re-create 'default' namespace
-  count = contains(var.reserved_namespaces, local.kubernetes_namespace) ? 0 : 1
+  # do not try to re-create existing namespaces
+  count = contains(var.reserved_namespaces, var.kubernetes_namespace) ? 0 : 1
   metadata {
     annotations = {
       name = local.kubernetes_namespace

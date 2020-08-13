@@ -10,11 +10,6 @@ variable "labels" {
 }
 
 variable "kubernetes_namespace" {
-  description = "Your kubernetes namespace"
-  default     = "master"
-}
-
-variable "master_override" {
-  description = "Master branch equals namespace"
-  default     = "teamname"
+  description    = "Your kubernetes namespace"
+  default        = "team-qa"
 }

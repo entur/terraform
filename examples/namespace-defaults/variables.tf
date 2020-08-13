@@ -11,5 +11,5 @@ variable "labels" {
 
 variable "kubernetes_namespace" {
   description = "Your kubernetes namespace"
-  default     = "master"
+  default     = "production"
 }

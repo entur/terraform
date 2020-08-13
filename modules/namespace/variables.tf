@@ -3,11 +3,17 @@ variable "labels" {
   type        = map(string)
 }
 
+variable "kubernetes_namespace" {
+  description = "Your kubernetes namespace, prefixed by `env-` if branch_environment=true"
+}
+
 variable "reserved_namespaces" {
   description = "Reserved namespaces"
   type        = list(string)
   default = [
     "master",
+    "main",
+    "rtd",
     "default",
     "dev",
     "test",
@@ -18,12 +24,8 @@ variable "reserved_namespaces" {
   ]
 }
 
-variable "kubernetes_namespace" {
-  description = "Your kubernetes namespace"
-  default     = "default"
-}
-
-variable "master_override" {
+variable "branch_environment" {
   description = "Master branch equals namespace"
-  default     = "production"
+  type        = bool
+  default     = true
 }
