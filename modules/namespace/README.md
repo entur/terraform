@@ -14,7 +14,7 @@ If you specify a reserved namespace such as `default`, `dev`, `staging` or `prod
 |------|-------------|:----:|:-----:|:-----:|
 | labels | The labels you wish to decorate with | string | n/a | yes |
 | kubernetes_namespace | The namespace you wish to target. This is the namespace that the secrets will be stored in | string | n/a | yes |
-| branch_environment | Set true if the intention is a short lived namespace | bool | true | no |
+| branch_environment | Set false if the intention is a long lived namespace | bool | true | no |
 
 ## Outputs
 
