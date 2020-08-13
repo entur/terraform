@@ -47,6 +47,7 @@ resource "google_service_account" "storage_bucket_service_account" {
   account_id   = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}"
   display_name   = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}"
   description = "Service Account for ${var.labels.app} bucket"
+  project = var.gcp_project
 }
 
 # Create key for service account

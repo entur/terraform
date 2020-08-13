@@ -23,6 +23,7 @@ resource "google_service_account" "team-instance-credentials" {
   account_id   = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}-cred"
   display_name   = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}-cred"
   description = "Service Account for ${var.labels.app} SQL"
+  project = var.gcp_project
 }
 
 resource "google_service_account_key" "team-instance-credentials" {
