@@ -21,6 +21,8 @@ Have fun terraforming!
 
 ## [Entur](./modules/entur)
 
+## [Namespace](./modules/namespace)
+
 ## [Postgres](./modules/postgres)
     
 ## [Redis](./modules/redis)
