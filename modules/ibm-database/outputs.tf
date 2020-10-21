@@ -9,3 +9,7 @@ output "db-host_name" {
 output "db-host_name2" {
   value = var.db_type == "databases-for-mongodb" ? ibm_database.db.connectionstrings.0.hosts.1.hostname : ""
 }
+
+output "db-host_name3" {
+  value = var.db_type == "databases-for-mongodb" ? ibm_database.db.connectionstrings.0.hosts.2.hostname : ""
+}
