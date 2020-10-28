@@ -50,7 +50,7 @@ Creates an IBM database for postgreSQL and mongoDB.
 | Name | Description |
 |------|-------------|
 | db-generated-application-password | The database password, also stored in ${var.labels.app}-db-credentials |
-| db-host_name | The database instance name (2 hosts for MongoDB) |
+| db-host_name | The database instance name (up to 3 hosts for MongoDB) |
 
 Find more in [official documentation](https://cloud.ibm.com/docs/terraform?topic=terraform-databases-resources)
 

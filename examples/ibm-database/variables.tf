@@ -30,5 +30,3 @@ variable "labels" {
     app     = "example-app"
   }
 }
-
-
