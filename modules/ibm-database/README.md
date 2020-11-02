@@ -43,14 +43,14 @@ Creates an IBM database for postgreSQL and mongoDB.
 
   **Use major versions. You can find the latest versions from the [catalog pages](https://cloud.ibm.com/catalog?category=databases)
 
-  ***MongoDB requires minimum 20480 mb disc size.
+  ***MongoDB requires minimum 30720mb(10240x3) disc size and 15360mb(5120x3) RAM.
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | db-generated-application-password | The database password, also stored in ${var.labels.app}-db-credentials |
-| db-host_name | The database instance name (up to 3 hosts for MongoDB) |
+| db-host_name | The database instance name (minimum 3 hosts for MongoDB) |
 
 Find more in [official documentation](https://cloud.ibm.com/docs/terraform?topic=terraform-databases-resources)
 
