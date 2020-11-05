@@ -9,13 +9,13 @@ provider "google" {
 
 # https://www.terraform.io/docs/providers/google/r/storage_bucket.html
 resource "google_storage_bucket" "storage_bucket" {
-  name               = length(var.bucket_instance_custom_name) > 0 ? var.bucket_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
-  force_destroy      = var.force_destroy
-  location           = var.location
-  project            = var.gcp_project
-  storage_class      = var.storage_class
+  name                        = length(var.bucket_instance_custom_name) > 0 ? var.bucket_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
+  force_destroy               = var.force_destroy
+  location                    = var.location
+  project                     = var.gcp_project
+  storage_class               = var.storage_class
   uniform_bucket_level_access = var.uniform_bucket_level_access
-  labels             = var.labels
+  labels                      = var.labels
 
   versioning {
     enabled = var.versioning
@@ -43,11 +43,11 @@ resource "random_id" "suffix" {
 
 # Create Service account
 resource "google_service_account" "storage_bucket_service_account" {
-  count = var.account_id_use_existing == true ? 0 : 1
+  count        = var.account_id_use_existing == true ? 0 : 1
   account_id   = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}"
-  display_name   = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}"
-  description = "Service Account for ${var.labels.app} bucket"
-  project = var.gcp_project
+  display_name = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}"
+  description  = "Service Account for ${var.labels.app} bucket"
+  project      = var.gcp_project
 }
 
 # Create key for service account
@@ -71,7 +71,7 @@ resource "kubernetes_secret" "storage_bucket_service_account_credentials" {
 
 # Add service account as member to the bucket
 resource "google_storage_bucket_iam_member" "storage_bucket_iam_member" {
-  count = var.account_id_use_existing == true ? 0 : 1
+  count  = var.account_id_use_existing == true ? 0 : 1
   bucket = google_storage_bucket.storage_bucket.name
   role   = var.service_account_bucket_role
   member = "serviceAccount:${google_service_account.storage_bucket_service_account[0].email}"
