@@ -42,7 +42,7 @@ variable "log_bucket" {
 }
 
 variable "uniform_bucket_level_access" {
-  description = "Enables Bucket Policy Only access to a bucket"
+  description = "Enables Uniform bucket-level access to a bucket"
   default     = "false"
 }
 
