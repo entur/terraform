@@ -3,7 +3,7 @@ variable "gcp_project" {
 }
 
 variable "zone" {
-  description = "GCP default zone"
+  description = "GCP zone"
 }
 
 variable "labels" {

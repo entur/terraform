@@ -2,7 +2,11 @@ variable "gcp_project" {
   description = "The GCP project id"
 }
 
-variable "zone" {
+variable "region" {
+  description = "GCP default region"
+}
+
+variable "zoneLetter" {
   description = "GCP default zone"
 }
 
@@ -29,5 +33,3 @@ variable "prevent_destroy" {
   description = "Prevents destruction of this redis instance"
   type        = bool
 }
-
-

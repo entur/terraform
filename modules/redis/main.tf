@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.12"
+  required_version = ">= 0.13.2"
 }
 
 data "google_compute_network" "default-network" {
@@ -11,9 +11,9 @@ data "google_compute_network" "default-network" {
 // https://github.com/terraform-google-modules/terraform-google-memorystore
 module "memorystore" {
   source  = "terraform-google-modules/memorystore/google"
-  version = "1.0.0"
+  version = "1.3.0"
 
-  name     = length(var.redis_instance_custom_name) > 0 ? var.redis_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
+  name    = length(var.redis_instance_custom_name) > 0 ? var.redis_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
   project = var.gcp_project
 
   location_id        = var.zone
