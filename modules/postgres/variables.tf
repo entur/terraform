@@ -23,8 +23,13 @@ variable "labels" {
 }
 
 variable "availability_type" {
-  description = "The availability type for the master instance.This is only used to set up high availability for the PostgreSQL instance. Can be eitherZONAL orREGIONAL."
+  description = "The availability type for the master instance. This is only used to set up high availability for the PostgreSQL instance."
   default     = "ZONAL"
+
+  validation {
+    condition     = var.availability_type == "ZONAL" || var.availability_type == "REGIONAL"
+    error_message = "Can be either ZONAL or REGIONAL."
+  }
 }
 
 variable "kubernetes_namespace" {
@@ -51,6 +56,11 @@ variable "prevent_destroy" {
 variable "postgresql_version" {
   description = "Which POSTGRES version to use. Check availability before declaring any version."
   default     = "POSTGRES_9_6"
+
+  validation {
+    condition     = var.postgresql_version == "POSTGRES_9_6" || var.postgresql_version == "POSTGRES_11"
+    error_message = "Can be either POSTGRES_9_6 or POSTGRES_11."
+  }
 }
 
 variable "db_instance_custom_name" {
@@ -76,6 +86,16 @@ variable "db_instance_backup_enabled" {
 variable "db_instance_backup_time" {
   description = "When the backup should be scheduled"
   default     = "04:00"
+}
+
+variable "db_instance_backup_location" {
+  description = "Where to store backups"
+  default     = "europe-north1"
+}
+
+variable "db_instance_backup_point_in_time" {
+  description = "Enable point in time recovery for database."
+  default     = false
 }
 
 variable "db_instance_tier" {

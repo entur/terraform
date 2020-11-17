@@ -1,10 +1,10 @@
 terraform {
-  required_version = ">= 0.12"
+  required_version = ">= 0.13.2"
 }
 
 module "postgres" {
-  source = "github.com/entur/terraform//modules/postgres"
-  #source               = "../../modules/postgres"
+  #source = "github.com/entur/terraform//modules/postgres"
+  source               = "../../modules/postgres"
   gcp_project          = var.gcp_project
   labels               = var.labels
   kubernetes_namespace = var.kubernetes_namespace
@@ -13,4 +13,5 @@ module "postgres" {
   region               = var.region
   zoneLetter           = var.zone_letter
   prevent_destroy      = var.prevent_destroy
+  postgresql_version   = "POSTGRES_11"
 }

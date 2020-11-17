@@ -22,7 +22,7 @@ variable "labels" {
     manager = "terraform"
     team    = "teamname"
     slack   = "talk-teamname"
-    app     = "service"
+    app     = "testpgv4"
   }
 }
 
@@ -33,6 +33,7 @@ variable "kubernetes_namespace" {
 variable "prevent_destroy" {
   description = "Prevent the destruction of this postgres database"
   type        = bool
+  default     = false
 }
 
 variable "db_name" {
