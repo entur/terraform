@@ -1,5 +1,11 @@
 terraform {
-  required_version = ">= 0.12"
+  required_version = ">= 0.13"
+  required_providers {
+    ibm = {
+      source = "IBM-Cloud/ibm"
+      version = "1.12.0"
+    }
+  }
 }
 
 provider "ibm" {
@@ -51,7 +57,8 @@ resource "kubernetes_secret" "team-db-credentials" {
     args     = ibm_database.db.connectionstrings.0.queryoptions
     cert     = base64decode(ibm_database.db.connectionstrings.0.certbase64)
     host     = ibm_database.db.connectionstrings.0.hosts.0.hostname
-    host2    = var.db_type == "databases-for-mongodb" ? ibm_database.db.connectionstrings.0.hosts.1.hostname : ""
+    host2    = length(ibm_database.db.connectionstrings.0.hosts) >= 2 ? ibm_database.db.connectionstrings.0.hosts.1.hostname : ""
+    host3    = length(ibm_database.db.connectionstrings.0.hosts) >= 3 ? ibm_database.db.connectionstrings.0.hosts.2.hostname : ""
     name     = ibm_database.db.connectionstrings.0.database
     port     = ibm_database.db.connectionstrings.0.hosts.0.port
     username = var.application_db_user
