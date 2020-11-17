@@ -26,7 +26,7 @@ variable "kubernetes_namespace" {
 }
 
 variable "branch_environment" {
-  description = "Master branch equals namespace"
+  description = "A branch environment will be prefixed with env- and indicate a short lived namespace"
   type        = bool
   default     = true
 }

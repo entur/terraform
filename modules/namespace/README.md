@@ -6,7 +6,7 @@ This module can be used to set up namespaces for teams.
 
 Creates a namespace named `${var.kubernetes_namespace}` or `env-${var.kubernetes_namespace}` if `branch_environment` is set to `true`.
 
-If you specify a reserved namespace such as `default`, `dev`, `staging` or `production` no namespace will be created.
+If you specify a reserved namespace such as `default`, `dev`, `staging` or `production` no namespace will be created, and terraform will raise an error.
 
 ## Inputs
 
