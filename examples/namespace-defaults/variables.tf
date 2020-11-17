@@ -11,5 +11,5 @@ variable "labels" {
 
 variable "kubernetes_namespace" {
   description = "Your kubernetes namespace"
-  default     = "demo-ns" # creeates env-demo-ns namespace!
+  default     = "demo-ns"
 }
