@@ -3,7 +3,8 @@
 Team Plattform provides a set of Terraform Modules that will help you write a conformant and concise Terraform configuration for your applications!
 
 ## Handle module versions
-If you want to control the version of your module dependency you can add `?ref=TAG` at the end of the `source` parameter for the modules. 
+
+If you want to control the version of your module dependency you can add `?ref=TAG` at the end of the `source` parameter for the modules.
 
 Locate a [release](https://github.com/entur/terraform/releases) and update `source` like f.ex:
 
@@ -24,10 +25,8 @@ Have fun terraforming!
 ## [Namespace](./modules/namespace)
 
 ## [Postgres](./modules/postgres)
-    
-## [Redis](./modules/redis)
 
-## [Secret](./modules/secret)
+## [Redis](./modules/redis)
 
 # Available Modules for IBM Cloud
 
