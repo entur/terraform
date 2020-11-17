@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.12"
+  required_version = ">= 0.13.2"
 }
 
 locals {
@@ -19,11 +19,11 @@ provider "google-beta" {
 }
 
 resource "google_service_account" "team-instance-credentials" {
-  count = var.account_id_use_existing == true ? 0 : 1
+  count        = var.account_id_use_existing == true ? 0 : 1
   account_id   = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}-cred"
-  display_name   = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}-cred"
-  description = "Service Account for ${var.labels.app} SQL"
-  project = var.gcp_project
+  display_name = length(var.account_id) > 0 ? var.account_id : "${var.labels.app}-${var.kubernetes_namespace}-cred"
+  description  = "Service Account for ${var.labels.app} SQL"
+  project      = var.gcp_project
 }
 
 resource "google_service_account_key" "team-instance-credentials" {
@@ -31,28 +31,28 @@ resource "google_service_account_key" "team-instance-credentials" {
 }
 
 resource "google_project_iam_member" "project" {
-  count = var.account_id_use_existing == true ? 0 : 1
+  count   = var.account_id_use_existing == true ? 0 : 1
   project = var.gcp_project
   role    = "roles/cloudsql.client"
   member  = "serviceAccount:${google_service_account.team-instance-credentials[0].email}"
 }
 
-//https://registry.terraform.io/modules/GoogleCloudPlatform/sql-db/google/2.0.0/submodules/postgresql
+// https://registry.terraform.io/modules/GoogleCloudPlatform/sql-db/google/latest/submodules/postgresql
 module "sql-db_postgresql" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
-  version = "2.0.0"
+  version = "4.3.0"
 
-  database_version  = var.postgresql_version
-  name              = length(var.db_instance_custom_name) > 0 ? var.db_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
-  project_id        = var.gcp_project
-  region            = var.region
-  zone              = var.zoneLetter
-  user_labels       = var.labels
-  db_name           = var.db_name
-  tier              = var.db_instance_tier
-  disk_size         = var.db_instance_disk_size
-  availability_type = var.availability_type
-
+  database_version    = var.postgresql_version
+  name                = length(var.db_instance_custom_name) > 0 ? var.db_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
+  project_id          = var.gcp_project
+  region              = var.region
+  zone                = "${var.region}-${var.zoneLetter}"
+  user_labels         = var.labels
+  db_name             = var.db_name
+  tier                = var.db_instance_tier
+  disk_size           = var.db_instance_disk_size
+  availability_type   = var.availability_type
+  deletion_protection = var.prevent_destroy
 
   ip_configuration = {
     ipv4_enabled        = true
@@ -64,24 +64,14 @@ module "sql-db_postgresql" {
   user_name = var.db_user
 
   backup_configuration = {
-    enabled            = var.db_instance_backup_enabled
-    start_time         = var.db_instance_backup_time
-    binary_log_enabled = false #cannot be used with postgres
+    enabled                        = var.db_instance_backup_enabled
+    start_time                     = var.db_instance_backup_time
+    location                       = var.db_instance_backup_location
+    point_in_time_recovery_enabled = var.db_instance_backup_point_in_time
   }
   create_timeout = var.create_timeout
   delete_timeout = var.delete_timeout
   update_timeout = var.update_timeout
-}
-
-resource "random_id" "protector" {
-  count       = var.prevent_destroy ? 1 : 0
-  byte_length = 8
-  keepers = {
-    protector = module.sql-db_postgresql.instance_name
-  }
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "random_id" "suffix" {

@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.12"
+  required_version = ">= 0.13.2"
 }
 
 module "postgres" {
@@ -13,4 +13,5 @@ module "postgres" {
   region               = var.region
   zoneLetter           = var.zone_letter
   prevent_destroy      = var.prevent_destroy
+  postgresql_version   = "POSTGRES_11"
 }
