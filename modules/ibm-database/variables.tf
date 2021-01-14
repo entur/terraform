@@ -61,7 +61,7 @@ variable "db_version" {
 variable "db_instance_disk_size_mb" {
   description = "DB disc size in MB"
   type        = string
-  default     = "10240"
+  default     = "16384"
 }
 
 variable "db_instance_memory_mb" {
