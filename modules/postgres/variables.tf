@@ -103,3 +103,14 @@ variable "update_timeout" {
   description = "The optional timout that is applied to limit long database updates."
   default     = "10m"
 }
+
+
+variable "require_ssl" {
+  description = "Require SSL for authorized networks"
+  default = true
+}
+
+variable "authorized_networks" {
+  description = "Pass inn array of authorized networks"
+  default = []
+}

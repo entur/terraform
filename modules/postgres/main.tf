@@ -57,8 +57,8 @@ module "sql-db_postgresql" {
   ip_configuration = {
     ipv4_enabled        = true
     private_network     = null
-    require_ssl         = true
-    authorized_networks = []
+    require_ssl         = var.require_ssl
+    authorized_networks = var.authorized_networks
   }
 
   user_name = var.db_user
