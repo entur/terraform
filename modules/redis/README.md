@@ -35,6 +35,7 @@ Generated Kubernetes Config Map:
 | prevent_destroy | Prevents the destruction of the bucket | bool | false | no |
 | redis_instance_custom_name | Redis instance name override | string | n/a | no |
 | enable_apis | Flag for enabling redis API in your project | bool | false | no |
+| authorized_network_name_override | Redis instance authorized network name override | string | n/a | no
 
 ## Outputs
 

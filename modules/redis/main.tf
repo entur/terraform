@@ -17,7 +17,7 @@ module "memorystore" {
   project = var.gcp_project
 
   location_id        = var.zone
-  authorized_network = "${data.google_compute_network.default-network.self_link}"
+  authorized_network = length(var.authorized_network_name_override) > 0 ? var.authorized_network_name_override : "${data.google_compute_network.default-network.self_link}"
 
   enable_apis = "${var.enable_apis}"
 
