@@ -4,7 +4,7 @@ terraform {
 
 data "google_compute_network" "default-network" {
   provider = google
-  name     = "default-network"
+  name     = length(var.authorized_network_name_override) > 0 ? var.authorized_network_name_override : "default-network"
   project  = var.gcp_project
 }
 

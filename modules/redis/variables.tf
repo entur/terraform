@@ -41,3 +41,8 @@ variable "enable_apis" {
   type        = bool
   default     = false
 }
+
+variable "authorized_network_name_override" {
+  description = "Redis instance authorized network name override (empty string = use standard convention)"
+  default     = ""
+}
