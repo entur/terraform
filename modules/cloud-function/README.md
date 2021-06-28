@@ -13,7 +13,7 @@ This module can be used to quickly add cloud functions
             runtime              = "python39"
         }
         
-## Exlaination
+## Explain
         
 * function_source -> Content on catalog *src* is copied to cloud-function   
 * runtime -> Cloud function runtime (python/nodejs/jave). See terraform documentation for google_cloudfunctions_function
