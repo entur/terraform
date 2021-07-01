@@ -41,10 +41,16 @@ resource "google_cloudfunctions_function" "pubsub_trigger" {
 
   project               = var.project
   region                = var.region
+  labels                = var.labels 
 
   name                  = var.function_name
+
+  environment_variables = var.environment_variables
+  
   runtime               = var.runtime
-  available_memory_mb   = 128
+  timeout               = var.timeout
+  available_memory_mb   = var.run_memmory
+
   source_archive_bucket = google_storage_bucket_object.zip.bucket
   source_archive_object = google_storage_bucket_object.zip.name
   entry_point           = var.function_entry_point
