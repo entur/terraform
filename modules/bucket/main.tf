@@ -55,17 +55,32 @@ resource "google_service_account_key" "storage_bucket_service_account_key" {
 }
 
 # Add SA key to kubernetes
+#resource "kubernetes_secret" "storage_bucket_service_account_credentials" {
+#  depends_on = [
+#    google_storage_bucket.storage_bucket
+#  ]
+#  metadata {
+#    name      = "${var.labels.app}-bucket-credentials"
+#    namespace = var.kubernetes_namespace
+#  }
+#  data = {
+#    "credentials.json" = "${base64decode(google_service_account_key.storage_bucket_service_account_key.private_key)}"
+#  }
+#}
+
 resource "kubernetes_secret" "storage_bucket_service_account_credentials" {
   depends_on = [
     google_storage_bucket.storage_bucket
   ]
   metadata {
-    name      = "${var.labels.app}-bucket-credentials"
-    namespace = var.kubernetes_namespace
+    name        = "${var.labels.app}-bucket-credentials"
+    namespace   = var.kubernetes_namespace
+    annotations = {
+      "kubernetes.io/service-account.name" = service_account_id
+    }
   }
-  data = {
-    "credentials.json" = "${base64decode(google_service_account_key.storage_bucket_service_account_key.private_key)}"
-  }
+
+  type = "kubernetes.io/service-account-token"
 }
 
 # Add service account as member to the bucket
