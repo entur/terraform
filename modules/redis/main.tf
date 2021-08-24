@@ -23,7 +23,7 @@ module "memorystore" {
 
   reserved_ip_range = var.reserved_ip_range
   labels = var.labels
-  redis_configs = var.redis_terrconfigs
+  redis_configs = var.redis_configs
 }
 
 resource "random_id" "protector" {

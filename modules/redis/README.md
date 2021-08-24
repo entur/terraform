@@ -36,11 +36,11 @@ Generated Kubernetes Config Map:
 | redis_instance_custom_name       | Redis instance name override                                                                                                                                    | string |    n/a    |    no    |
 | enable_apis                      | Flag for enabling redis API in your project                                                                                                                     |  bool  |   false   |    no    |
 | authorized_network_name_override | Redis instance authorized network name override                                                                                                                 | string |    n/a    |    no    |
-| redis_config                     | Configuration parameters passed to the redis instance on creation in Google Cloud                                                                               |  map   | see below |    no    |
+| redis_configs                     | Configuration parameters passed to the redis instance on creation in Google Cloud                                                                               |  map   | see below |    no    |
 
 ### Redis settings
 
-Redis settings are passed to Google through key/values in the `redis_config` map.
+Redis settings are passed to Google through key/values in the `redis_configs` map.
 The default values are as follows, and should be overridden if necessary:
 
 ```
