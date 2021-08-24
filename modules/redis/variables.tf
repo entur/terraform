@@ -22,7 +22,7 @@ variable "redis_configs" {
   type = map(string)
   default = {
     activedefrag = "yes"
-  # maxmemory-policy = "allkeys-lfu"
+    maxmemory-policy = "allkeys-lfu"
   }
 }
 
