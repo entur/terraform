@@ -11,7 +11,7 @@ data "google_compute_network" "default-network" {
 // https://github.com/terraform-google-modules/terraform-google-memorystore
 module "memorystore" {
   source  = "terraform-google-modules/memorystore/google"
-  version = "1.0.0"
+  version = "3.1.0"
 
   name     = length(var.redis_instance_custom_name) > 0 ? var.redis_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
   project = var.gcp_project
@@ -22,8 +22,8 @@ module "memorystore" {
   enable_apis = "${var.enable_apis}"
 
   reserved_ip_range = var.reserved_ip_range
-
   labels = var.labels
+  redis_configs = var.redis_configs
 }
 
 resource "random_id" "protector" {

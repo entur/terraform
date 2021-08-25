@@ -17,6 +17,15 @@ variable "labels" {
   #
 }
 
+variable "redis_configs" {
+  description = "Redis configuration settings."
+  type = map(string)
+  default = {
+    activedefrag = "yes"
+    maxmemory-policy = "allkeys-lfu"
+  }
+}
+
 variable "reserved_ip_range" {
   description = "IP range for Redis, check Confluence `IP addressing scheme`"
 }
