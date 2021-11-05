@@ -41,8 +41,8 @@ variable "log_bucket" {
   default     = "false"
 }
 
-variable "bucket_policy_only" {
-  description = "Enables Bucket Policy Only access to a bucket"
+variable "uniform_bucket_level_access" {
+  description = "Enables Uniform bucket-level access to a bucket"
   default     = "false"
 }
 

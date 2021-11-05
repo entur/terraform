@@ -44,7 +44,7 @@ Creates a bucket named **app-namespace-suffix**: `${var.labels.app}-${var.kubern
 | storage_class | The storage class of the bucket | string | "REGIONAL" | no |
 | versioning | Should bucket be versioned? | bool | true | no |
 | log_bucket | The bucket's Access & Storage Logs configuration | bool | false | no |
-| bucket_policy_only | Enables Bucket Policy Only access to a bucket | bool | false | no |
+| uniform_bucket_level_access | Enables Uniform bucket-level access access to a bucket | bool | false | no |
 | service_account_bucket_role | Role of the Service Account | string | "roles/storage.objectViewer" | no |
 | account_id | Storage service account id (name) override | string | "" | no |
 | account_id_use_existing | Set this to true if you want to use an existing service account | bool | false | no |
