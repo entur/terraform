@@ -61,7 +61,7 @@ resource "kubernetes_secret" "storage_bucket_service_account_credentials" {
     google_storage_bucket.storage_bucket
   ]
   metadata {
-    name      = "${var.kubernetes_credential_file_name}"
+    name      = "${var.kubernetes_credentials_file_name}"
     namespace = var.kubernetes_namespace
   }
   data = {
