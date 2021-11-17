@@ -55,7 +55,6 @@ resource "google_service_account_key" "storage_bucket_service_account_key" {
   service_account_id = var.account_id_use_existing == true ? var.account_id : google_service_account.storage_bucket_service_account[0].name
 }
 
-
 # Add SA key to kubernetes
 resource "kubernetes_secret" "storage_bucket_service_account_credentials" {
   depends_on = [
