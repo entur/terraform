@@ -48,6 +48,7 @@ Creates a bucket named **app-namespace-suffix**: `${var.labels.app}-${var.kubern
 | service_account_bucket_role | Role of the Service Account | string | "roles/storage.objectViewer" | no |
 | account_id | Storage service account id (name) override | string | "" | no |
 | account_id_use_existing | Set this to true if you want to use an existing service account | bool | false | no |
+| kubernetes_credentials_file_name | File name of the kubernetes secrets file containing the created service account credentials. | String | <labels.app>-bucket-credentials | no |
 
 ## Outputs
 

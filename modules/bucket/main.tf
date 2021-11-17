@@ -61,7 +61,7 @@ resource "kubernetes_secret" "storage_bucket_service_account_credentials" {
     google_storage_bucket.storage_bucket
   ]
   metadata {
-    name      = "${var.labels.app}-bucket-credentials"
+    name      = length(var.kubernetes_credentials_file_name) > 0 ? var.kubernetes_credentials_file_name : "${var.labels.app}-bucket-credentials"
     namespace = var.kubernetes_namespace
   }
   data = {
