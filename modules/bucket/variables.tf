@@ -73,6 +73,6 @@ variable "bucket_instance_custom_name" {
 }
 
 variable "kubernetes_credentials_file_name" {
-  description = "File name of the kubernetes secrets file containing the created service account credentials."
-  default     = "${var.labels.app}-bucket-credentials"
+  description = "File name of the kubernetes secrets file containing the created service account credentials. If this variable is left empty the generated file will be named according to: \"{var.labels.app}-bucket-credentials\""
+  default     = ""
 }
