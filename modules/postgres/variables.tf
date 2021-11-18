@@ -103,3 +103,13 @@ variable "update_timeout" {
   description = "The optional timout that is applied to limit long database updates."
   default     = "10m"
 }
+
+variable "db_instance_backup_location" {
+  description = "What region the backup is stored. If no value is set a region based default is applied, se offical GCP SQL documentation for details."
+  default = null
+}
+
+variable "db_instance_backup_point_in_time_recovery_enabled" {
+  description = "If point int time recovery is enabled or not."
+  default = false
+}

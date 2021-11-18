@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.12"
+  required_version = ">= 0.13"
 }
 
 locals {
@@ -40,7 +40,7 @@ resource "google_project_iam_member" "project" {
 //https://registry.terraform.io/modules/GoogleCloudPlatform/sql-db/google/2.0.0/submodules/postgresql
 module "sql-db_postgresql" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
-  version = "2.0.0"
+  version = "5.1.1"
 
   database_version  = var.postgresql_version
   name              = length(var.db_instance_custom_name) > 0 ? var.db_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
@@ -64,10 +64,12 @@ module "sql-db_postgresql" {
   user_name = var.db_user
 
   backup_configuration = {
-    enabled            = var.db_instance_backup_enabled
-    start_time         = var.db_instance_backup_time
-    binary_log_enabled = false #cannot be used with postgres
+    enabled                        = var.db_instance_backup_enabled
+    start_time                     = var.db_instance_backup_time
+    location                       = var.db_instance_backup_location
+    point_in_time_recovery_enabled = var.db_instance_backup_point_in_time_recovery_enabled
   }
+  
   create_timeout = var.create_timeout
   delete_timeout = var.delete_timeout
   update_timeout = var.update_timeout

@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.12.19"
+  required_version = ">= 0.13"
 }
 resource "kubernetes_secret" "the-secret" {
   metadata {
