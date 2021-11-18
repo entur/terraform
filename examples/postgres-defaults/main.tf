@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.1"
+  required_version = ">= 0.13"
 }
 
 module "postgres" {
