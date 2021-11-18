@@ -3,7 +3,6 @@ terraform {
 }
 
 provider "google" {
-  version = "~> 3.38.0"
   project = var.gcp_project
 }
 
