@@ -9,7 +9,7 @@ Locate a [release](https://github.com/entur/terraform/releases) and update `sour
 
 ```hcl
 module "postgres" {
-  source               = "github.com/entur/terraform//modules/postgres?ref=0.0.6"
+  source               = "github.com/entur/terraform//modules/postgres?ref=v0.0.27"
 }
 ```
 
