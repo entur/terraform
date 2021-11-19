@@ -39,7 +39,7 @@ Creates a postgresql named **app-namespace-suffix**: `${var.labels.app}-${var.ku
 |------|-------------|:----:|:-----:|:-----:|
 | gcp_project | The name of your GCP project | string | n/a | yes |
 | region | The default region | string | n/a | yes |
-| zoneLetter | The default zone [a,b,c,d,e etc] | string | n/a | yes |
+| zone | The default zone [i.e. europe-west1-d] | string | n/a | yes |
 | labels | The labels you wish to decorate with | string | n/a | yes |
 | labels.team | The name of your team or department | string | n/a | yes |
 | labels.app | The name of this application / workload | string | n/a | yes |

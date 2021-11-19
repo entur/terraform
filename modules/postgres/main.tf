@@ -9,13 +9,13 @@ locals {
 provider "google" {
   project = var.gcp_project
   region  = var.region
-  zone    = "${var.region}-${var.zoneLetter}"
+  zone    = var.zone
 }
 
 provider "google-beta" {
   project = var.gcp_project
   region  = var.region
-  zone    = "${var.region}-${var.zoneLetter}"
+  zone    = var.zone
 }
 
 resource "google_service_account" "team-instance-credentials" {
@@ -46,7 +46,7 @@ module "sql-db_postgresql" {
   name              = length(var.db_instance_custom_name) > 0 ? var.db_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
   project_id        = var.gcp_project
   region            = var.region
-  zone              = var.zoneLetter
+  zone              = var.zone
   user_labels       = var.labels
   db_name           = var.db_name
   tier              = var.db_instance_tier

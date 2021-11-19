@@ -9,7 +9,7 @@ variable "region" {
   description = "GCP default region"
 }
 
-variable "zoneLetter" {
+variable "zone" {
   description = "GCP default zone"
 }
 
