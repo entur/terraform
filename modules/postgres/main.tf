@@ -37,7 +37,7 @@ resource "google_project_iam_member" "project" {
   member  = "serviceAccount:${google_service_account.team-instance-credentials[0].email}"
 }
 
-//https://registry.terraform.io/modules/GoogleCloudPlatform/sql-db/google/2.0.0/submodules/postgresql
+//https://registry.terraform.io/modules/GoogleCloudPlatform/sql-db/google/5.1.1/submodules/postgresql
 module "sql-db_postgresql" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
   version = "5.1.1"
@@ -69,6 +69,8 @@ module "sql-db_postgresql" {
     location                       = var.db_instance_backup_location
     point_in_time_recovery_enabled = var.db_instance_backup_point_in_time_recovery_enabled
   }
+
+  deletion_protection = var.prevent_destroy
   
   create_timeout = var.create_timeout
   delete_timeout = var.delete_timeout
