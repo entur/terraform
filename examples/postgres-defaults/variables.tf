@@ -9,10 +9,10 @@ variable "region" {
   default     = "europe-west1"
 }
 
-variable "zone_letter" {
+variable "zone" {
   description = "Letter of target GCP zone"
   type        = string
-  default     = "d"
+  default     = "europe-west1-d"
 }
 
 variable "labels" {

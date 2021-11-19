@@ -11,6 +11,6 @@ module "postgres" {
   db_name              = var.db_name
   db_user              = var.db_user
   region               = var.region
-  zoneLetter           = var.zone_letter
+  zone                 = var.zone
   prevent_destroy      = var.prevent_destroy
 }
