@@ -9,12 +9,6 @@ variable "region" {
   default     = "europe-west1"
 }
 
-variable "zone" {
-  description = "Letter of target GCP zone"
-  type        = string
-  default     = "europe-west1-d"
-}
-
 variable "labels" {
   description = "Labels used in all resources"
   type        = map(string)
