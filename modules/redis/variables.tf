@@ -55,3 +55,9 @@ variable "authorized_network_name_override" {
   description = "Redis instance authorized network name override (empty string = use standard convention)"
   default     = ""
 }
+
+  variable "memory_size_gb" {
+  description = "Redis memory size in GiB. Defaulted to 1 GiB"
+  type        = number
+  default     = 1
+}
