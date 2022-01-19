@@ -21,6 +21,8 @@ module "memorystore" {
 
   enable_apis = "${var.enable_apis}"
 
+  memory_size_gb = var.memory_size_gb
+
   reserved_ip_range = var.reserved_ip_range
   labels = var.labels
   redis_configs = var.redis_configs
