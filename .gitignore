@@ -31,3 +31,4 @@ tfplan
 
 # .auto.var files
 *.auto.tfvars
+/.idea/

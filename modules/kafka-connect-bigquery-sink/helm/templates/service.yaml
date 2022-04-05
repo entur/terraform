@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "kafka-connect-bigquery-sink.fullname" . }}
+  labels:
+    {{- include "kafka-connect-bigquery-sink.labels" . | nindent 4 }}
+spec:
+  selector:
+    app: {{ .Release.Name }}
+  ports:
+    - name: http
+      port: 80
+      targetPort: {{ .Values.service.internalPort }}
+

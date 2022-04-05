@@ -1,0 +1,62 @@
+# Default values for kafka-connect-bigquery-sink-chart
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image: ${artifact.metadata.image}
+
+labels:
+  team: data
+  slack: talk-data
+  type: backend
+
+service:
+  internalPort: 8083
+
+kafka:
+  admin:
+    username: "admin"
+  consumer:
+    username: "kcbqsUser"
+
+prometheus:
+  metricsPort: "9090"
+  javaagentLib: "/etc/kafka-connect/prometheus/jmx_prometheus_javaagent-0.16.1.jar"
+  configFile: "/etc/kafka-connect/prometheus/kafka-connect.yml"
+
+connect:
+  bootstrapServers: "https://bootstrap.rtd-ext.kafka.entur.io:9095"
+  restPort: "8083"
+  groupId: "kafka-connect-bigquery-sink-1"
+  configStorageTopic: "kafka-connect-bigquery-sink-config-storage-1"
+  offsetStorageTopic: "kafka-connect-bigquery-sink-offset-storage-1"
+  statusStorageTopic: "kafka-connect-bigquery-sink-status-storage-1"
+  restAdvertisedHostName: "kafka-connect-bigquery-sink"
+  keyConverter: "org.apache.kafka.connect.storage.StringConverter"
+  valueConverter: "io.confluent.connect.avro.AvroConverter"
+  internalKeyConverter: "org.apache.kafka.connect.storage.StringConverter"
+  internalValueConverter: "io.confluent.connect.avro.AvroConverter"
+  valueConverterSchemaRegistryUrl: "http://schema-registry.rtd-ext.kafka.entur.io:8001"
+
+  consumer:
+    groupId: "kafka-connect-bigquery-sink-consumer-1"
+
+secrets:
+  secretFiles: "kafka-connect-bigquery-sink-secret-files"
+  secretValues: "kafka-connect-bigquery-sink-secret-values"
+
+config:
+  configFiles: "kafka-connect-bigquery-sink-config-files"
+
+scripts:
+  scriptFiles: "kafka-connect-bigquery-sink-script-files"
+
+resources:
+  requests:
+    memory: "2048Mi"
+    cpu: "200m"
+  limits:
+    memory: "3072Mi"
+    cpu: "2000m"
+
+container:
+  name: "kafka_connect_bigquery_sink"
