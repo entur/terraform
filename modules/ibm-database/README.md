@@ -55,13 +55,4 @@ Creates an IBM database for postgreSQL and mongoDB.
 Find more in [official documentation](https://cloud.ibm.com/docs/terraform?topic=terraform-databases-resources)
 
 ## Install IBM provider
-
-Use this script to install IBM provider locally
-
-```
-echo "install IBM provider"
-mkdir -p ~/.terraform.d/plugins/localdomain/provider/ibm/1.12.0/linux_amd64
-curl -O -L https://github.com/IBM-Cloud/terraform-provider-ibm/releases/download/v1.12.0/terraform-provider-ibm_1.12.0_linux_amd64.zip
-unzip terraform-provider-ibm_1.12.0_linux_amd64.zip
-mv terraform-provider-ibm_v1.12.0 ~/.terraform.d/plugins/localdomain/provider/ibm/1.12.0/linux_amd64
-rm -rf terraform-provider-ibm_1.12.0_linux_amd64.zip```
+There is no need to install IBM provider anymore.
