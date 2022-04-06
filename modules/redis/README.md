@@ -44,7 +44,7 @@ Redis settings are passed to Google through key/values in the `redis_configs` ma
 The default values are as follows, and should be overridden if necessary:
 
 ```
-maxmemory_policy = allkeys-lfu
+maxmemory-policy = allkeys-lfu
 activedefrag = yes
 ```
 
