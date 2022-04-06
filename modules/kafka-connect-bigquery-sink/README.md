@@ -1,13 +1,13 @@
 # Kafka Sink Connector - BigQuery module
 
-This module provides the Terraform infrastructure to deploy a Kafka Connect job that consumes data from Kafka specified topics and writes to BigQuery tables.
+This module provides the Terraform infrastructure to deploy a Kafka Sink Connector job that consumes data from Kafka specified topics and writes to BigQuery tables.
 
 ## Deploying a sink connector
-Kafka sink connector for BigQuery is driven by the configuration managed by terraform module as listed in terraform directory.
+Kafka sink connector for BigQuery is driven by the configuration managed by terraform module.
 
 Most of the parameters are fixed but there are few specific to a given team to be configured as described in 'How to deploy?' section below
 
-Refer to the [example folder](../../examples/kafka-connect-bigquery-sink-example) for a quick reference to set up multiple instances Kafka sink connectors ina given kubernetes environment.
+Refer to the [example folder](../../examples/kafka-connect-bigquery-sink-example) for a quick reference to set up multiple instances of sink connectors in a given kubernetes environment.
 
 Example use of module:
 ```terraform
@@ -50,16 +50,15 @@ module "kafka_connect_bigquery_sink" {
 ### How to run?
 After helm chart is deployed to k8s, Sink Connector starts automatically with the specified configuration enabled.
 
+### How to add/remove topics to the sink connector
+1. Update the `kafka_topics` input variable with new list of topics
+2. Replace and restart the helm release state to reload the updated configuration by running the command `terraform apply --var-file=env/dev.tfvars -replace="module.kafka_connect_bigquery_sink.helm_release.kafka_connect_bigquery_sink"`
+
 ### Troubleshooting
 1. ssh into sink connector pod by running `kubectl -n dev exec --tty --stdin <pod> -- /bin/bash` to interact with Kafka Connect as it's REST API is not public
 2. Go to scripts directory `cd /etc/kafka-connect-bigquery-sink/scripts/`
 3. Run `./kcbqs.sh --status` to check the status of connector
 4. Run `./kcbqs.sh --start` to start and `./kcbqs.sh --stop` to stop the sink connector
 
-### How to add/remove topics to the sink connector
-1. Update the `kafka_topics` input variable with new list of topics
-2. Replace and restart the helm release state to reload the updated configuration by running the command `terraform apply --var-file=env/dev.tfvars -replace="module.kafka_connect_bigquery_sink.helm_release.kafka_connect_bigquery_sink"`
-
-
 ## References
-1. Confluents [Google BigQuery Sink Connector](https://docs.confluent.io/kafka-connect-bigquery/current/overview.html) and its [configuration](https://docs.confluent.io/kafka-connect-bigquery/current/kafka_connect_bigquery_config.html)
+1. Confluent's [Google BigQuery Sink Connector](https://docs.confluent.io/kafka-connect-bigquery/current/overview.html) and its [configuration](https://docs.confluent.io/kafka-connect-bigquery/current/kafka_connect_bigquery_config.html)
