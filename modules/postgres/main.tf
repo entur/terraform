@@ -40,7 +40,7 @@ resource "google_project_iam_member" "project" {
 //https://registry.terraform.io/modules/GoogleCloudPlatform/sql-db/google/5.1.1/submodules/postgresql
 module "sql-db_postgresql" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
-  version = "5.1.1"
+  version = "6.0.0-deprecated"
 
   database_version  = var.postgresql_version
   name              = length(var.db_instance_custom_name) > 0 ? var.db_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"

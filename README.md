@@ -1,3 +1,7 @@
+<span style="color:red;font-size:18pt">:warning: *These modules are deprecated.*</span><br>
+Next generation modules can be found here:<br>
+https://github.com/search?q=topic%3Aterraform-modules+-topic%3Adeprecated+org%3Aentur&type=Repositories
+
 # Terraform Modules [![CircleCI](https://circleci.com/gh/entur/terraform.svg?style=svg)](https://circleci.com/gh/entur/terraform)
 
 Team Plattform provides a set of Terraform Modules that will help you write a conformant and concise Terraform configuration for your applications!
