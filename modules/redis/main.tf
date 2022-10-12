@@ -11,7 +11,7 @@ data "google_compute_network" "default-network" {
 // https://github.com/terraform-google-modules/terraform-google-memorystore
 module "memorystore" {
   source  = "terraform-google-modules/memorystore/google"
-  version = "4.0.0-deprecated"
+  version = "3.1.0"
 
   name     = length(var.redis_instance_custom_name) > 0 ? var.redis_instance_custom_name : "${var.labels.app}-${var.kubernetes_namespace}-${random_id.suffix.hex}"
   project = var.gcp_project
