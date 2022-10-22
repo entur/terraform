@@ -1,0 +1,26 @@
+{
+  "name": "kafka-connect-bigquery-sink",
+  "config": {
+    "connector.class": "com.wepay.kafka.connect.bigquery.BigQuerySinkConnector",
+    "tasks.max" : "1",
+    "topics" : "${kafkaTopics}",
+    "sanitizeTopics" : "true",
+    "autoCreateTables" : "true",
+    "allowSchemaUnionization": "true",
+    "allowNewBigQueryFields" : "true",
+    "allowBigQueryRequiredFieldRelaxation": "true",
+    "allBQFieldsNullable": "true",
+    "bigQueryRetry": 1,
+    "bigQueryRetryWait": 1000,
+    "schemaRegistryLocation": "${kafkaSchemaRegistry}",
+    "project" : "${bigQueryProject}",
+    "defaultDataset" : "${bigQueryDataset}",
+    "keyfile" : "/etc/kafka-connect-bigquery-sink/secrets/service-account-credentials.json",
+    "transforms" : "RegexTransformation, InsertTimestampField",
+    "transforms.RegexTransformation.type" : "org.apache.kafka.connect.transforms.RegexRouter",
+    "transforms.RegexTransformation.regex" : "(kcbq_)(.*)",
+    "transforms.RegexTransformation.replacement" : "$2",
+    "transforms.InsertTimestampField.type" : "org.apache.kafka.connect.transforms.InsertField$Value",
+    "transforms.InsertTimestampField.timestamp.field" : "recordTimestamp?"
+  }
+}

@@ -31,6 +31,8 @@ Have fun terraforming!
 
 ## [Secret](./modules/secret)
 
+## [Kafka Sink Connector for BigQuery](./modules/kafka-connect-bigquery-sink)
+
 # Available Modules for IBM Cloud
 
 ## [IBM Database](./modules/ibm-database)

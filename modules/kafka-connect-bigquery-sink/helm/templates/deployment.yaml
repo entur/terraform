@@ -1,0 +1,146 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "kafka-connect-bigquery-sink.fullname" . }}
+  labels:
+    {{- include "kafka-connect-bigquery-sink.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+      provider: {{ .Chart.Name }}
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "{{ .Values.prometheus.metricsPort }}"
+      labels:
+        app: {{ .Release.Name }}
+        provider: {{ .Chart.Name }}
+    spec:
+      volumes:
+        - name: kafka-connect-bigquery-sink-secret-files
+          secret:
+            secretName: {{ .Values.secrets.secretFiles }}
+        - name: kafka-connect-bigquery-sink-config-files
+          configMap:
+            name: {{ .Values.config.configFiles }}
+        - name: kafka-connect-bigquery-sink-script-files
+          configMap:
+            name: {{ .Values.scripts.scriptFiles }}
+            defaultMode: 0777
+      containers:
+        - name: {{ .Values.container.name }}
+          image: {{ .Values.image }}
+          imagePullPolicy: Always
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/etc/kafka-connect-bigquery-sink/scripts/kcbqs.sh", "--start"]
+            preStop:
+              exec:
+                command: ["/etc/kafka-connect-bigquery-sink/scripts/kcbqs.sh", "--stop"]
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.internalPort }}
+              hostPort: {{ .Values.service.internalPort }}
+              protocol: TCP
+          livenessProbe:
+            exec:
+              command: ["/etc/confluent/docker/healthcheck.sh"]
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 20
+          readinessProbe:
+            exec:
+              command: ["/etc/kafka-connect-bigquery-sink/scripts/kcbqs.sh", "--status"]
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 20
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: "/etc/kafka-connect-bigquery-sink/secrets"
+              name: kafka-connect-bigquery-sink-secret-files
+            - mountPath: "/etc/kafka-connect-bigquery-sink/config"
+              name: kafka-connect-bigquery-sink-config-files
+            - mountPath: "/etc/kafka-connect-bigquery-sink/scripts/kcbqs.sh"
+              name: kafka-connect-bigquery-sink-script-files
+              subPath: "kcbqs.sh"
+          env:
+            - name: SERVICE_ACCOUNT_FILE_PATH
+              value: /etc/kafka-connect-bigquery-sink/secrets/service-account-credentials.json
+            - name: EXTRA_ARGS
+              value: {{ template "prometheusJmxExporter" . }}
+            - name: LOGBACK_CONFIG_FILE
+              value: "logback-default-production.xml"
+            - name: KAFKA_LOG4J_OPTS
+              value: " "
+            - name: KAFKA_OPTS
+              value: "-Dlogback.configurationFile=/etc/kafka-connect-bigquery-sink/config/logback.xml -Djava.util.logging.config.file=/etc/kafka-connect-bigquery-sink/config/logging.properties"
+            - name: KAFKA_ADMIN_USERNAME
+              value: {{ .Values.kafka.admin.username }}
+            - name: KAFKA_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.secretValues }}
+                  key: KAFKA_ADMIN_PASSWORD
+            - name: KAFKA_CONSUMER_USERNAME
+              value: {{ .Values.kafka.consumer.username }}
+            - name: KAFKA_CONSUMER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.secretValues }}
+                  key: KAFKA_CONSUMER_PASSWORD
+            - name: CONNECT_BOOTSTRAP_SERVERS
+              value: {{ .Values.connect.bootstrapServers }}
+            - name: CONNECT_REST_PORT
+              value: !!str {{ .Values.connect.restPort }}
+            - name: CONNECT_GROUP_ID
+              value: {{ .Values.connect.groupId }}
+            - name: CONNECT_CONSUMER_GROUP_ID
+              value: {{ .Values.connect.consumer.groupId }}
+            - name: CONNECT_CONFIG_STORAGE_TOPIC
+              value: {{ .Values.connect.configStorageTopic }}
+            - name: CONNECT_OFFSET_STORAGE_TOPIC
+              value: {{ .Values.connect.offsetStorageTopic }}
+            - name: CONNECT_STATUS_STORAGE_TOPIC
+              value: {{ .Values.connect.statusStorageTopic }}
+            - name: CONNECT_REST_ADVERTISED_HOST_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: CONNECT_PLUGIN_PATH
+              value: /usr/share/java,/usr/share/confluent-hub-components
+            - name: CONNECT_SECURITY_PROTOCOL
+              value: SASL_SSL
+            - name: CONNECT_SASL_MECHANISM
+              value: SCRAM-SHA-512
+            - name: CONNECT_SASL_JAAS_CONFIG
+              value: |
+                org.apache.kafka.common.security.scram.ScramLoginModule required \
+                  username="$(KAFKA_ADMIN_USERNAME)" \
+                  password="$(KAFKA_ADMIN_PASSWORD)";
+            - name: CONNECT_CONSUMER_SECURITY_PROTOCOL
+              value: SASL_SSL
+            - name: CONNECT_CONSUMER_SASL_MECHANISM
+              value: SCRAM-SHA-512
+            - name: CONNECT_CONSUMER_SASL_JAAS_CONFIG
+              value: |
+                org.apache.kafka.common.security.scram.ScramLoginModule required \
+                    username="$(KAFKA_CONSUMER_USERNAME)" \
+                    password="$(KAFKA_CONSUMER_PASSWORD)";
+            - name: CONNECT_KEY_CONVERTER
+              value: {{ .Values.connect.keyConverter }}
+            - name: CONNECT_VALUE_CONVERTER
+              value: {{ .Values.connect.valueConverter }}
+            - name: CONNECT_INTERNAL_KEY_CONVERTER
+              value: {{ .Values.connect.internalKeyConverter }}
+            - name: CONNECT_INTERNAL_VALUE_CONVERTER
+              value: {{ .Values.connect.internalValueConverter }}
+            - name: CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL
+              value: {{ .Values.connect.valueConverterSchemaRegistryUrl }}
+            - name: CONNECT_CONSUMER_MAX_POLL_RECORDS
+              value: "200"

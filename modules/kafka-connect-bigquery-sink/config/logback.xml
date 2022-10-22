@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <if condition='isDefined("LOGBACK_CONFIG_FILE")'>
+        <then>
+            <include resource="${LOGBACK_CONFIG_FILE}"/>
+        </then>
+        <else>
+            <include resource="logback-default-local.xml"/>
+        </else>
+    </if>
+    <logger name="org.I0Itec.zkclient" level="ERROR"/>
+    <logger name="org.reflections" level="ERROR"/>
+    <logger name="org.apache.zookeeper" level="ERROR"/>
+</configuration>
