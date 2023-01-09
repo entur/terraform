@@ -5,4 +5,5 @@ workflows:
   bump_version:
     jobs:
       - semver-orb/bump:
-          context: org-default-build
+          context: 
+            - org-default-build
