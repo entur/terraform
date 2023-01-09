@@ -11,4 +11,4 @@ workflows:
     jobs:
       - check_sa:
           context: 
-            - org-default-build
+            - global
