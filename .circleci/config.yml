@@ -1,9 +1,14 @@
 version: 2.1
-orbs:
-  semver-orb: tv2norge/semver-orb@0.0.1
+jobs:
+  check_sa:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: echo "test"
+
 workflows:
-  bump_version:
+  build:
     jobs:
-      - semver-orb/bump:
+      - check_sa:
           context: 
             - org-default-build
